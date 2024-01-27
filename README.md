@@ -1,3 +1,5 @@
+# Inventorty System
+
 ## Setup Instructions
 
 ### Clone the Repository
