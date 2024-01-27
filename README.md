@@ -29,11 +29,13 @@ Ensure you have the necessary PostgreSQL credentials set up in the `.env` file l
 ```dotenv
 # .env file
 
-DB_HOST=the_postgres_host
-DB_PORT=the_postgres_port
-DB_USERNAME=the_postgres_username
-DB_PASSWORD=the_postgres_password
-DB_NAME=the_postgres_database_name
+POSTGRES_URL=the_postgres_url
+
+POSTGRES_HOST=the_postgres_host
+POSTGRES_USERNAME=the_postgres_username
+POSTGRES_DATABASE=the_postgres_database_name
+POSTGRES_PASSWORD=the_postgres_password
+
 ```
 
 ### Running the Application
