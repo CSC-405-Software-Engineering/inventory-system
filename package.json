@@ -19,6 +19,8 @@
   ],
   "dependencies": {
     "@nestjs/mapped-types": "^2.0.5",
-    "class-validator": "^0.14.1"
+    "@nestjs/typeorm": "^10.0.2",
+    "class-validator": "^0.14.1",
+    "typeorm": "^0.3.20"
   }
 }
