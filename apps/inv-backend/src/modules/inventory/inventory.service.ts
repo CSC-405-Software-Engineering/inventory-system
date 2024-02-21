@@ -25,4 +25,12 @@ export class InventoryService {
         this.inventoryRepository.merge(existingInventory, inventory);
         return await this.inventoryRepository.save(existingInventory);
     }
+
+    async findAll(): Promise<Inventory[]> {
+        return this.inventoryRepository.find();
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} user`;
+      }
 }
