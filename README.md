@@ -1,4 +1,4 @@
-# Inventorty System
+# Inventory System
 
 ## Setup Instructions
 
