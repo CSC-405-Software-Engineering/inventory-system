@@ -14,7 +14,10 @@
   "devDependencies": {
     "turbo": "^1.11.3"
   },
-  "workspaces":[
+  "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "@nestjs/event-emitter": "^2.0.4"
+  }
 }
