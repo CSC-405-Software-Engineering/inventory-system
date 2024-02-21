@@ -10,7 +10,7 @@ export class Stock {
   name: string;
 
   @ManyToOne(() => Inventory, inventory => inventory.stocks)
-  @JoinColumn({ name: "InventoryID" })
+  @JoinColumn({ name: "InventoryId" })
   inventory: Inventory;
 
   @Column()
@@ -26,20 +26,20 @@ export class Stock {
   quantity: number;
 
   @Column()
-  unitprice: number;
+  unitPrice: number;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP'})
-  last_purchase_date: Date;
+  lastPurchaseDate: Date;
 
   @Column()
-  expiration_date: Date;
+  expirationDate: Date;
 
   @Column()
   location: string;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP'})
-  datecreated: Date;
+  dateCreated: Date;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-  dateupdated: Date;
+  dateUpdated: Date;
 }
