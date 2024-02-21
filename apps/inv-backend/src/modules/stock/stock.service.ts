@@ -36,14 +36,14 @@ export class StockService {
         return stock;
     }
     
-    async update(id: string, stock: Stock) {
+    async update(id: string, updateStockDto: UpdateStockDto) {
         const existingStock = await this.stockRepository.findOne({ where: { id } });
 
         if (!existingStock) {
             throw new NotFoundException(`Stock with ID ${id} not found`);
         }
 
-        this.stockRepository.merge(existingStock, stock);
+        Object.assign(existingStock, updateStockDto);
         return await this.stockRepository.save(existingStock);
 
     }
