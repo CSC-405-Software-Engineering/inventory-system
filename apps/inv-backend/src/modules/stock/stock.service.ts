@@ -35,20 +35,6 @@ export class StockService {
 
         return stock;
     }
-
-
-    async update(id: string, updateStockDto: UpdateStockDto): Promise<Stock> {
-        const existingInventory = await this.inventoryRepository.findOne({where: { id } });
-    
-        if (!existingInventory) {
-          throw new NotFoundException('Stock not found');
-        }
-    
-        // Update properties of existing inventory with the ones provided in updateStockDto
-        this.inventoryRepository.merge(existingInventory, updateStockDto);
-    
-        return await this.inventoryRepository.save(existingInventory);
-      }
     
     async update(id: string, stock: Stock) {
         const existingStock = await this.stockRepository.findOne({ where: { id } });
