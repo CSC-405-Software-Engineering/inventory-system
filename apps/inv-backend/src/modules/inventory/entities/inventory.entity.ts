@@ -12,4 +12,10 @@ export class Inventory {
   @OneToMany(() => Stock, stock => stock.inventory)
   stocks: Stock[];
 
+  @Column({ default: () => 'CURRENT_TIMESTAMP'})
+  dateCreated: Date;
+
+  @Column({ default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
+  dateUpdated: Date;  
+
 }
