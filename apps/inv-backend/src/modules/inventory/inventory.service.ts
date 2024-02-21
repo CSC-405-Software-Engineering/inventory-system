@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from './entities/inventory.entity';
 import { FindOneOptions, Repository } from 'typeorm';
+import { CreateInventoryDto } from './dto/createInventory.dto';
 
 @Injectable()
 export class InventoryService {
@@ -10,8 +11,13 @@ export class InventoryService {
         private readonly inventoryRepository: Repository<Inventory>,
     ) {}
 
-    async create(inventory: Inventory): Promise<Inventory> {
-        const newInventory = this.inventoryRepository.create(inventory);
+    async create(createInventoryDto: CreateInventoryDto): Promise<Inventory> {
+        const inventory = await this.inventoryRepository.findOne({ where: { name: createInventoryDto.name } });
+        if (inventory) {
+            throw new NotFoundException(`Inventory with name ${createInventoryDto.name} already exists`);
+        }
+
+        const newInventory = this.inventoryRepository.create(createInventoryDto);
         return await this.inventoryRepository.save(newInventory);
     }
 
