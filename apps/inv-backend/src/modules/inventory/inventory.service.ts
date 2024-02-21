@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from './entities/inventory.entity';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 
 @Injectable()
 export class InventoryService {
@@ -25,4 +25,14 @@ export class InventoryService {
         this.inventoryRepository.merge(existingInventory, inventory);
         return await this.inventoryRepository.save(existingInventory);
     }
+
+    async findOne(id: string): Promise<Inventory | null> {
+        const options: FindOneOptions<Inventory> = {
+          where: { id },
+        };
+    
+        const order = await this.inventoryRepository.findOne(options);
+        return order;
+      }
+    
 }
