@@ -30,7 +30,7 @@ export class InventoryService {
 
     async findOne(id: string): Promise<Inventory | null> {
         const options: FindOneOptions<Inventory> = {
-          where: { id },
+          where: { id},
         };
     
         const order = await this.inventoryRepository.findOne(options);
