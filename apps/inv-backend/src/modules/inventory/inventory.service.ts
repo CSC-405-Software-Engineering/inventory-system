@@ -10,12 +10,12 @@ export class InventoryService {
         private readonly inventoryRepository: Repository<Inventory>,
     ) {}
 
-    async createInventory(inventory: Inventory): Promise<Inventory> {
+    async create(inventory: Inventory): Promise<Inventory> {
         const newInventory = this.inventoryRepository.create(inventory);
         return await this.inventoryRepository.save(newInventory);
     }
 
-    async updateInventory(id: string, inventory:Inventory): Promise<Inventory> {
+    async update(id: string, inventory:Inventory): Promise<Inventory> {
         const existingInventory = await this.inventoryRepository.findOne({ where: { id } });
 
         if (!existingInventory) {
