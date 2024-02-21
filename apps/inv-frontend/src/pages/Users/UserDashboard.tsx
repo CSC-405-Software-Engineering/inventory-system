@@ -6,6 +6,8 @@ import {
 } from "@/store/slices/appSlice";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
+import {Card} from "flowbite-react";
+import Image from 'next/image';
 
 const UserDashboard = () => {
 
@@ -49,6 +51,37 @@ const UserDashboard = () => {
                 {`Hello, ${loadUserData?.user?.firstName || ""} ${
                   loadUserData?.user?.lastName || ""
                 }`}
+                <div className="absolute top-152 left-240 bg-gray-100  w-569 h-164 p-8 rounded-lg">
+                  <div className="mb-4 flex items-center justify-between  flex space-x-8">
+                    <h4>Low Stock</h4>
+                    <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                          See more
+                        </a>
+                  </div>
+                  <div className="mb-4 flex items-center justify-between flex space-x-8">
+                      <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                      imgAlt="image 1"
+                        horizontal >
+                          <div className="mb-4 flex items-center justify-between space-x-8">
+                          <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Potatoes</p>
+                            <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                              Dry Pantry
+                            </a>
+                          </div>
+                          <p className="text-yellow-500 text-xs">Only 2 left in stock</p>
+                      </Card>
+                      <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                        horizontal >
+                          <div className="mb-4 flex items-center justify-between space-x-8">
+                          <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Mackrel Fish</p>
+                            <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                              Fridge
+                            </a>
+                          </div>
+                          <p className="text-red-500 text-xs">Out of stock</p>
+                      </Card>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
