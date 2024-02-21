@@ -10,7 +10,7 @@ export class Stock {
   name: string;
 
   @ManyToOne(() => Inventory, inventory => inventory.stocks)
-  @JoinColumn({ name: "InventoryID" })
+  @JoinColumn({ name: "InventoryId" })
   inventory: Inventory;
 
   @Column()
