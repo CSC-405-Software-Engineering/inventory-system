@@ -12,12 +12,6 @@ export class Inventory {
   @Column()
   brand: string;
 
-  @Column()
-  category: string;
-
-  @Column({ nullable: true })
-  image?: string;
-
   @OneToMany(() => Stock, stock => stock.inventory)
   stocks: Stock[];
 
