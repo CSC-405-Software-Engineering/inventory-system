@@ -5,6 +5,7 @@ import { FindOneOptions, Repository } from 'typeorm';
 import { CreateInventoryDto } from './dto/createInventory.dto';
 import { UpdateInventoryDto } from './dto/updateInventory.dto';
 
+
 @Injectable()
 export class InventoryService {
     constructor(
@@ -13,6 +14,10 @@ export class InventoryService {
     ) {}
 
     async create(createInventoryDto: CreateInventoryDto): Promise<Inventory> {
+      const inventory = await this.inventoryRepository.findOne({ where: { name: createInventoryDto.name } });
+        if (inventory) {
+            throw new NotFoundException(`Inventory with name ${createInventoryDto.name} already exists`);
+        }
         const newInventory = this.inventoryRepository.create(createInventoryDto);
         return await this.inventoryRepository.save(newInventory);
     }
