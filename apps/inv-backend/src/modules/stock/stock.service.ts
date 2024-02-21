@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateStockDto } from './dto/createStock.dto';
-import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Stock } from './entities/stock.entity';
+import { Repository } from 'typeorm';
+import { Stock } from './entities/stock.entity'; // Import your Stock entity
+import { CreateStockDto } from './dto/createStock.dto'; // Import your DTO
+import { UpdateStockDto } from './dto/updateStock.dto';
 
 @Injectable()
 export class StockService {
-
     constructor(
         @InjectRepository(Stock) private readonly stockRepository: Repository<Stock>,
     ) {}
@@ -36,6 +36,20 @@ export class StockService {
         return stock;
     }
 
+
+    async update(id: string, updateStockDto: UpdateStockDto): Promise<Stock> {
+        const existingInventory = await this.inventoryRepository.findOne({where: { id } });
+    
+        if (!existingInventory) {
+          throw new NotFoundException('Stock not found');
+        }
+    
+        // Update properties of existing inventory with the ones provided in updateStockDto
+        this.inventoryRepository.merge(existingInventory, updateStockDto);
+    
+        return await this.inventoryRepository.save(existingInventory);
+      }
+    
     async update(id: string, stock: Stock) {
         const existingStock = await this.stockRepository.findOne({ where: { id } });
 
