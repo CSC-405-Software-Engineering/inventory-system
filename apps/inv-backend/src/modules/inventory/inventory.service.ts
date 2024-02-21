@@ -33,6 +33,10 @@ export class InventoryService {
         return await this.inventoryRepository.save(existingInventory);
     }
 
+  async findAll(): Promise<Inventory[]> {
+        return this.inventoryRepository.find();
+    }
+
     async findOne(id: string): Promise<Inventory | null> {
         const options: FindOneOptions<Inventory> = {
           where: { id},
