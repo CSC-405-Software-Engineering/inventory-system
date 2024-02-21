@@ -31,8 +31,8 @@ export class InventoryService {
           where: { id },
         };
     
-        const order = await this.inventoryRepository.findOne(options);
-        return order;
+        const inventory = await this.inventoryRepository.findOne(options);
+        return inventory;
       }
     
 }
