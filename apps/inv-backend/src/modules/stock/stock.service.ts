@@ -37,8 +37,8 @@ export class StockService {
 
     }
 
-    async update(id: number, updateStockDto: UpdateStockDto): Promise<Stock> {
-        const existingInventory = await this.inventoryRepository.findOne(id);
+    async update(id: string, updateStockDto: UpdateStockDto): Promise<Stock> {
+        const existingInventory = await this.inventoryRepository.findOne({where: { id } });
     
         if (!existingInventory) {
           throw new NotFoundException('Stock not found');
