@@ -13,3 +13,4 @@ export class InventoryController {
       return await this.InventoryService.remove(+id);
     } 
 }
+//
