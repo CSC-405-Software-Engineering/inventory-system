@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
   const navigate = useNavigate();
   useEffect(()=> {
-    navigate("/student-dashboard", { replace: true });
+    navigate("/dashboard", { replace: true });
   }, [])
   return (
     <>
