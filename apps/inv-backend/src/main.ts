@@ -22,6 +22,7 @@ async function bootstrap() {
     ignoreGlobalPrefix: false,
   });
 
+  app.enableCors();
   app.setGlobalPrefix("/backend")
 
   try {

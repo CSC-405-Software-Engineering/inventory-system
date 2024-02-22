@@ -37,6 +37,10 @@ export const appApi = createApi({
       query: (courseId:string) => `v1/courses/${courseId}`,
     }),
 
+    getInventory: builder.query<any, void>({
+      query: () => "v1/inventory",
+    }),
+
     loadUser: builder.query<any, void>({
       query: () => "v1/users/user",
       providesTags: ["User"],
@@ -112,6 +116,7 @@ export const {
   useRegistrationMutation,
   useGetCoursesQuery,
   useLoadUserQuery,
+  useGetInventoryQuery,
   useGetCurrentSessionQuery,
   useGetScheduleByProgramAndLevelQuery,
   useGetStudentCoursesQuery,
