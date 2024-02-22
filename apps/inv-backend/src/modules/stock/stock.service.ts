@@ -4,11 +4,14 @@ import { Repository } from 'typeorm';
 import { Stock } from './entities/stock.entity'; // Import your Stock entity
 import { CreateStockDto } from './dto/createStock.dto'; // Import your DTO
 import { UpdateStockDto } from './dto/updateStock.dto';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+
 @Injectable()
 export class StockService {
   constructor(
     @InjectRepository(Stock)
     private readonly inventoryRepository: Repository<Stock>,
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   async create(createStockDto: CreateStockDto): Promise<Stock> {
@@ -23,18 +26,34 @@ export class StockService {
 
       const newInventory = this.inventoryRepository.create(createStockDto);
 
-      return await this.inventoryRepository.save(newInventory);
+      const savedInventory = await this.inventoryRepository.save(newInventory);
+
+      // Check if the new inventory has a low stock level
+      if (savedInventory.quantity < LOW_STOCK_THRESHOLD) {
+        this.eventEmitter.emit('stock.low', savedInventory); // Emit 'stock.low' event
+      }
+  
+      return savedInventory;
+
+    }
+  
+ 
+    async findAll(): Promise<Stock[]> {
+      return this.inventoryRepository.find();
     }
   
 
-
-
-    async findAll() {
-
-    }
-
-    async findOne() {
-
+    async findOne(id:string): Promise<Stock> {
+      const stock = await this.inventoryRepository.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (!stock) {
+        throw new NotFoundException(`School with ID "${id}" not found`);
+      }
+  
+      return stock;
     }
 
     async update(id: string, updateStockDto: UpdateStockDto): Promise<Stock> {
@@ -46,12 +65,24 @@ export class StockService {
     
         // Update properties of existing inventory with the ones provided in updateStockDto
         this.inventoryRepository.merge(existingInventory, updateStockDto);
-    
-        return await this.inventoryRepository.save(existingInventory);
-      }
-    
-    
-    
-    async remove() {
+
+    const updatedInventory = await this.inventoryRepository.save(existingInventory);
+
+    // Check if the updated inventory has a low stock level
+    if (updatedInventory.quantity < LOW_STOCK_THRESHOLD) {
+      this.eventEmitter.emit('stock.low', updatedInventory); // Emit 'stock.low' event
+
     }
+    return updatedInventory;
+  }
+    
+    
+    
+    async  remove(id: number) {
+      return `This action removes a #${id} stock`;
+    }
+  
+  
 }
+
+const LOW_STOCK_THRESHOLD = 10;
