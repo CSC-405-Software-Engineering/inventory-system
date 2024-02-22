@@ -20,7 +20,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/backend": {
-        target: "http://localhost:3000",
+        target: "https://inventory-system-i0do.onrender.com/",
         changeOrigin: true,
       },
     },

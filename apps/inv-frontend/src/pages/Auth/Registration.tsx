@@ -17,6 +17,7 @@ import {
 import { loadUser } from "@/store/slices/authSlice";
 import DashboardLayout from "@/components/DashboardLayout";
 import { generateRandomPassword } from "@/utils/constant";
+import MetaTags from "@/components/MetaTags";
 
 const Registration = () => {
   const [isRegistrationLoading, setIsRegistrationLoading] = useState(false);
@@ -43,6 +44,11 @@ const Registration = () => {
   );
 
   return (
+    <>
+        <MetaTags
+          title={"Login"}
+          pageUrl={window.location.href}
+        />
     <DashboardLayout>
       <p className="black text-[2rem] font-bold mb-8">Register User</p>
       <div className="flex flex-col justify-center w-full max-w-[62rem] bg-[#FBFBFB] gap-8 rounded-[1.1875rem] p-8">
