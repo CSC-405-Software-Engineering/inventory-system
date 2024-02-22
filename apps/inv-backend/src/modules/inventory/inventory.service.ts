@@ -46,24 +46,21 @@ export class InventoryService {
     return await this.inventoryRepository.save(existingInventory);
   }
 
-  async findAll(): Promise<Inventory[]> {
-    return this.inventoryRepository.find();
+  async findAll() {
+    return await this.inventoryRepository.find();
   }
 
-  async findOne(id: string): Promise<Inventory | null> {
-    const options: FindOneOptions<Inventory> = {
-      where: { id },
-    };
+  async findOne(id: string){
+    const inventory = await this.inventoryRepository.findOne({where: {id}});
+    if (!inventory) {
+      throw new NotFoundException(`Inventory with ID "${id}" not found`);
+    }
 
-    const inventory = await this.inventoryRepository.findOne(options);
     return inventory;
   }
 
   async remove(id: string): Promise<Inventory> {
-    const existingInventory = await this.inventoryRepository.findOne({
-      where: { id },
-    });
-
+    const existingInventory = await this.findOne(id);
     if (!existingInventory) {
       throw new NotFoundException(`Inventory with ID ${id} not found`);
     }
