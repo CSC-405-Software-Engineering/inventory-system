@@ -1,5 +1,6 @@
 import { Auth } from 'src/modules/auth/entities/auth.entity';
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Inventory } from 'src/modules/inventory/entities/inventory.entity';
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -15,4 +16,8 @@ export class User {
   @OneToOne(() => Auth, (auth) => auth.user)
   @JoinColumn()
   auth: Auth;
+
+  @OneToMany(() => Inventory, (inventory) => inventory.user)
+  inventory: Inventory[];
+  
 }
