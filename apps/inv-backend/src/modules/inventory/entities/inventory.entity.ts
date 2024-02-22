@@ -21,4 +21,5 @@ export class Inventory {
   @OneToMany(() => Stock, stock => stock.inventory)
   stocks: Stock[];
 
+
 }
