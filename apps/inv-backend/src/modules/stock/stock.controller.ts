@@ -14,13 +14,8 @@ export class StockController {
   @Post('create')
   @ApiOperation({ summary: 'Create a new stock' })
   @ApiResponse({ status: 201, description: 'Stock successfully created' })
-  async create(@Body() createStockDto: CreateStockDto, @Res() response) {
-    const data = await this.stockService.create(createStockDto);
-    response.status(HttpStatus.CREATED).json({
-      status: 'success',
-      message: 'Stock created successfully',
-      data: data,
-    });
+  async create(@Body() createStockDto: CreateStockDto) {
+    return await this.stockService.create(createStockDto);
   }
 
   @Get()
