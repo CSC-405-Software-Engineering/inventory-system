@@ -20,11 +20,10 @@ export class StockService {
   ) {}
 
   async create(createStockDto: CreateStockDto): Promise<Stock> {
-    
-      console.log('createStockDto', createStockDto);
+  
 
       const existingStock = await this.stockRepository.findOne({
-        where: { id: createStockDto.inventoryId },
+        where: { name: createStockDto.name },
       });
 
       if (existingStock) {

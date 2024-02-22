@@ -14,7 +14,7 @@ export class InventoryController {
     @Post('create')
     async create(@Body() createInventoryDto: CreateInventoryDto, @Req() request: Request, @Res() response){
       try {
-        
+        // console.log('User', request['user'])
         const inventory = await this.inventoryService.create(createInventoryDto, request['user'].id);
         return {
           status: 'success',
