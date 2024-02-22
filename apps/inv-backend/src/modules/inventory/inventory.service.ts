@@ -47,7 +47,11 @@ export class InventoryService {
   }
 
   async findAll() {
-    return await this.inventoryRepository.find();
+    return await this.inventoryRepository.find({
+      relations: {
+          stocks: true,
+      },
+  });
   }
 
   async findOne(id: string){
