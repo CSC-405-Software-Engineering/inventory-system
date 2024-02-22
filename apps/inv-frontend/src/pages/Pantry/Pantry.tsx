@@ -199,7 +199,7 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
               </svg>
             </div>
           </div>
-          <div className="flex flex-row gap-[42px]">
+          <div className="flex flex-row justify-between w-full">
             <AddNew />
             {InventoryItems.map((inventory) => (
               <InventoryItem

@@ -1,4 +1,4 @@
-import { Button, Modal } from "flowbite-react";
+import { Button, Dropdown, DropdownItem, Modal } from "flowbite-react";
 import { useState } from "react";
 
 interface AddListsModalProps {
@@ -25,84 +25,82 @@ const AddListsModal = ({ openModal, setOpenModal }: AddListsModalProps) => {
           Add Items{" "}
         </Modal.Header>
         <Modal.Body className="py-0 overflow-y-visible">
-          <div className="relative h-[14rem] rounded-[0.3125rem] overflow-hidden">
-            <div className="self-stretch h-[281px] flex-col justify-start items-start gap-[25px] flex p-4">
-              <div className="justify-center items-start gap-8 flex">
-                <div className="w-40 text-slate-700 text-sm font-medium leading-tight">
-                  Item name*
-                </div>
-                    <div>
-                      <input
-                        type="text"
-                        id="item_name"
-                        className="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="e.g Cabbage"
-                        required
-                      />
-                    </div>
+          <div className="  flex-col justify-start items-start gap-[25px] flex p-4">
+            <div className="justify-center items-start gap-8 flex">
+              <div className="w-40 text-slate-700 text-sm font-medium leading-tight">
+                Item name*
               </div>
-              <div className="self-stretch justify-start items-start gap-8 inline-flex">
-                <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
-                  Image of item*
+              <div>
+                <input
+                  type="text"
+                  id="item_name"
+                  className="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="e.g Cabbage"
+                  required
+                />
+              </div>
+            </div>
+            <div className="self-stretch justify-start items-start gap-8 inline-flex">
+              <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
+                Image of item*
+              </div>
+              <div className="grow shrink basis-0 h-[74px] justify-start items-start gap-5 flex">
+                <div className="w-16 h-16 p-4 bg-gray-100 rounded-[200px] justify-center items-center flex">
+                  <div className="w-8 h-8 relative flex-col justify-start items-start flex"></div>
                 </div>
-                <div className="grow shrink basis-0 h-[74px] justify-start items-start gap-5 flex">
-                  <div className="w-16 h-16 p-4 bg-gray-100 rounded-[200px] justify-center items-center flex">
-                    <div className="w-8 h-8 relative flex-col justify-start items-start flex"></div>
-                  </div>
-                    <div className="self-stretch h-[74px] px-6 py-4 bg-white rounded-xl border border-gray-200 flex-col justify-start items-center gap-1 flex">
-                      <div className="self-stretch h-[42px] flex-col justify-start items-center gap-3 flex">
-                        <div className="self-stretch h-[42px] flex-col justify-start items-center gap-1 flex">
-                          <div className="self-stretch justify-center items-start gap-1 inline-flex">
-                            <div className="justify-center items-center gap-2 flex">
-                              <div className="text-red-500 text-sm font-semibold leading-tight">
-                                Click to upload
-                              </div>
-                            </div>
-                            <div className="text-slate-600 text-sm font-normalleading-tight">
-                              or drag and drop
-                            </div>
-                          </div>
-                          <div className="self-stretch text-center text-slate-600 text-xs font-normal font-['Inter'] leading-[18px]">
-                            SVG, PNG, JPG or GIF (max. 800x400px)
+                <div className="self-stretch h-[74px] px-6 py-4 bg-white rounded-xl border border-gray-200 flex-col justify-start items-center gap-1 flex">
+                  <div className="self-stretch h-[42px] flex-col justify-start items-center gap-3 flex">
+                    <div className="self-stretch h-[42px] flex-col justify-start items-center gap-1 flex">
+                      <div className="self-stretch justify-center items-start gap-1 inline-flex">
+                        <div className="justify-center items-center gap-2 flex">
+                          <div className="text-red-500 text-sm font-semibold leading-tight">
+                            Click to upload
                           </div>
                         </div>
+                        <div className="text-slate-600 text-sm font-normalleading-tight">
+                          or drag and drop
+                        </div>
+                      </div>
+                      <div className="self-stretch text-center text-slate-600 text-xs font-normal font-['Inter'] leading-[18px]">
+                        SVG, PNG, JPG or GIF (max. 800x400px)
                       </div>
                     </div>
-                  </div>
-              </div>
-              <div className="self-stretch h-11 justify-start items-start gap-8 inline-flex">
-                <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
-                  Category*
-                </div>
-                <div className="grow shrink basis-0 h-11 flex-col justify-start items-start gap-1.5 inline-flex">
-                  <div className="self-stretch px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 justify-start items-center gap-2 inline-flex">
-                    <div className="grow shrink basis-0 h-6 justify-start items-center gap-2 flex">
-                      <div className="text-gray-900 text-base font-medium font-['Inter'] leading-normal">
-                        Vegetables
-                      </div>
-                    </div>
-                    <div className="w-5 h-5 relative"></div>
-                  </div>
-                </div>
-              </div>
-              <div className="self-stretch h-11 justify-start items-start gap-8 inline-flex">
-                <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
-                  Location*
-                </div>
-                <div className="grow shrink basis-0 h-11 flex-col justify-start items-start gap-1.5 inline-flex">
-                  <div className="self-stretch px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 justify-start items-center gap-2 inline-flex">
-                    <div className="grow shrink basis-0 h-6 justify-start items-center gap-2 flex">
-                      <div className="w-[15px] h-[15px] relative"></div>
-                      <div className="text-gray-900 text-base font-medium font-['Inter'] leading-normal">
-                        Refrigerated
-                      </div>
-                    </div>
-                    <div className="w-5 h-5 relative"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="justify-start items-start gap-[121px] inline-flex">
+            <div className="self-stretch h-11 justify-start items-start gap-8 inline-flex">
+              <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
+                Category*
+              </div>
+              <Dropdown label="Select a category" color="gray" dismissOnClick={false}>
+                <DropdownItem>Vegetables</DropdownItem>
+                <DropdownItem>Meat & Poultry</DropdownItem>
+                <DropdownItem>Dairy</DropdownItem>
+                <DropdownItem>Fish</DropdownItem>
+                <DropdownItem>Fruit</DropdownItem>
+                <DropdownItem>Grain</DropdownItem>
+                <DropdownItem>Eggs</DropdownItem>
+                <DropdownItem>Legumes</DropdownItem>
+              </Dropdown>
+            </div>
+            <div className="self-stretch h-11 justify-start items-start gap-8 inline-flex">
+              <div className="w-40 text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
+                Location*
+              </div>
+              <div className="grow shrink basis-0 h-11 flex-col justify-start items-start gap-1.5 inline-flex">
+                <div className="self-stretch px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 justify-start items-center gap-2 inline-flex">
+                  <div className="grow shrink basis-0 h-6 justify-start items-center gap-2 flex">
+                    <div className="w-[15px] h-[15px] relative"></div>
+                    <div className="text-gray-900 text-base font-medium font-['Inter'] leading-normal">
+                      Refrigerated
+                    </div>
+                  </div>
+                  <div className="w-5 h-5 relative"></div>
+                </div>
+              </div>
+            </div>
+            <div className="justify-between w-full items-start inline-flex">
               <div className="justify-start items-start gap-1.5 flex">
                 <div className="w-[107px] flex-col justify-start items-start gap-1.5 inline-flex">
                   <div className="text-slate-700 text-sm font-medium font-['Inter'] leading-tight">
@@ -164,14 +162,9 @@ const AddListsModal = ({ openModal, setOpenModal }: AddListsModalProps) => {
                 </div>
               </div>
             </div>
-            <div className="h-[100px] pt-8 border-black flex-col justify-start items-start flex">
-              <div className="self-stretch px-6 pb-6 justify-start items-start gap-3 inline-flex">
-                <div className="grow shrink basis-0 h-11 px-[18px] py-2.5 flex"></div>
-              </div>
-            </div>
           </div>
         </Modal.Body>
-        <Modal.Footer className=" flex border-0 justify-center">
+        <Modal.Footer className=" flex border-0 justify-between w-full px-10">
           <Button
             className=" bg-white text-slate-700 text-base font-semibold leading-normal w-60 border-gray-300"
             onClick={handleAddLists}
