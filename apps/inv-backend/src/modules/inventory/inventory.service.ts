@@ -51,9 +51,7 @@ export class InventoryService {
   }
 
   async findOne(id: string){
-    console.log('here')
     const inventory = await this.inventoryRepository.findOne({where: {id}});
-    console.log('inventory', inventory)
     if (!inventory) {
       throw new NotFoundException(`Inventory with ID "${id}" not found`);
     }
@@ -62,10 +60,7 @@ export class InventoryService {
   }
 
   async remove(id: string): Promise<Inventory> {
-    const existingInventory = await this.inventoryRepository.findOne({
-      where: { id },
-    });
-
+    const existingInventory = await this.findOne(id);
     if (!existingInventory) {
       throw new NotFoundException(`Inventory with ID ${id} not found`);
     }
