@@ -6,7 +6,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { NotificationModule } from './modules/notification/notification.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-
 import { InventoryModule } from './modules/inventory/inventory.module';
 import { StockModule } from './modules/stock/stock.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -16,9 +15,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
     UsersModule,
-    NotificationModule,EventEmitterModule.forRoot(),
     InventoryModule,
-    StockModule],
+    StockModule,
+    NotificationModule,EventEmitterModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
