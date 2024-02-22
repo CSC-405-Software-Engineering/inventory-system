@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { CreateStockDto } from './dto/createStock.dto';
 import { UpdateStockDto } from './dto/updateStock.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiParam, ApiProperty, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { StockService } from './stock.service';
 
 @ApiTags('stock')
@@ -25,6 +25,9 @@ export class StockController {
   @Post('create')
   @ApiOperation({ summary: 'Create a new stock' })
   @ApiResponse({ status: 201, description: 'Stock successfully created' })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiBody({ type: CreateStockDto, description: 'Stock creation details' })
+  @ApiProperty({example: {name: 'Stock Name', quantity: 10, inventoryId: 'Inventory ID', imageUrl: 'Image URL', minStock: 5, maxStock: 20, unitPrice: 1000, location: "Fridge",  expirtationDate: "2022-12-12"}})
   async create(@Body() createStockDto: CreateStockDto, @Res() response) {
     try {
       const stock = await this.stockService.create(createStockDto);
@@ -68,6 +71,7 @@ export class StockController {
   @ApiResponse({ status: 200, description: 'Stock successfully retrieved' })
   @ApiResponse({ status: 404, description: 'Stock not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiParam({ name: 'id', required: true, description: 'Stock ID' })
   async findOne(@Param('id') id: string, @Res() response) {
     try {
       const stock = await this.stockService.findOne(id);
@@ -89,6 +93,8 @@ export class StockController {
   @ApiResponse({ status: 200, description: 'Stock successfully updated' })
   @ApiResponse({ status: 404, description: 'Stock not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiParam({ name: 'id', required: true, description: 'Stock ID' })
+  @ApiBody({ type: UpdateStockDto, description: 'Stock update details'})
   async update(
     @Param('id') id: string,
     @Body() UpdateStockDto: UpdateStockDto,
@@ -115,6 +121,7 @@ export class StockController {
   @ApiResponse({ status: 200, description: 'Stock successfully deleted' })
   @ApiResponse({ status: 404, description: 'Stock not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
+  @ApiParam({ name: 'id', required: true, description: 'Stock ID' })
   async remove(@Param('id') id: string, @Res() response) {
     try {
       const stockToDelete = await this.stockService.findOne(id);
