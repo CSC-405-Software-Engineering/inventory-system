@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import * as fs from 'fs';
 import * as ejs from 'ejs';
+import * as moment from 'moment';
 
 interface Email {
     to: string;
@@ -62,6 +63,33 @@ export class NotificationService {
       },
     });
   }
+  async expiryDateEmail(data) {
+    const { email, productName, expiryDate } = data;
+
+    const daysUntilExpiry = moment(expiryDate).diff(moment(), 'days');
+
+    const subject = `Expiry Reminder: ${productName} has ${daysUntilExpiry} days left to expire`;
+
+    const htmlContent = await ejs.renderFile(
+        './notification/emails/expiry.html',
+        {
+            productName,
+            expiryDate,
+            daysUntilExpiry
+        }
+    );
+
+    await this.mailerService.sendMail({
+        to: email,
+        subject,
+        html: htmlContent,
+        context: {
+            productName,
+            expiryDate,
+            daysUntilExpiry
+        },
+    });
+}
 }
 
 

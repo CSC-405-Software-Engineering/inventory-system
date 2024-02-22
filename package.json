@@ -18,6 +18,7 @@
     "apps/*"
   ],
   "dependencies": {
+    "@nestjs-modules/mailer": "^1.10.3",
     "@nestjs/event-emitter": "^2.0.4",
     "@nestjs/mapped-types": "^2.0.5",
     "@nestjs/typeorm": "^10.0.2",
