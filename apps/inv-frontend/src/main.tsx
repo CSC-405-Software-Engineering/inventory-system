@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { loadUser } from './store/slices/authSlice.ts';
-import { store } from './store/store.ts';
+// import { loadUser } from './store/slices/authSlice.ts';
+// import { store } from './store/store.ts';
 
 
 // store.dispatch<any>(loadUser());

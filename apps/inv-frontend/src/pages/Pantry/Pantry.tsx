@@ -3,11 +3,8 @@ import FreezerTabIcon from "@/assets/icons/FreezerTagIcon";
 import FrigdeTabIcon from "@/assets/icons/FridgeTabIcon";
 import AddListsModal from "@/components/AddListsModal";
 import AddNew from "@/components/AddNew";
-import AddNewItemBtn from "@/components/AddNewBtn";
-import AuthNavBar from "@/components/AuthNavBar";
 import DashboardLayout from "@/components/DashboardLayout";
 import InventoryItem from "@/components/InventoryItem";
-import SideMenu from "@/components/SideMenu";
 import { ReactElement, useState } from "react";
 
 type TabItem = {

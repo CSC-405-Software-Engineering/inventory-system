@@ -1,19 +1,18 @@
 import {
   LoginProps,
-  Role,
-  UserStateProps,
+
+  // UserStateProps,
 } from "@/store/interfaces/user.interface";
-import { LoginSchema, RegistrationSchema } from "@/utils/Yup";
-import { Alert, Checkbox, Label } from "flowbite-react";
+import {  RegistrationSchema } from "@/utils/Yup";
+import { Alert } from "flowbite-react";
 import { Form, Formik } from "formik";
 import { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
-import { LiaEyeSlashSolid, LiaEyeSolid } from "react-icons/lia";
 import { useLoginMutation } from "@/store/slices/appSlice";
 import ButtonSpinner from "@/components/ButtonSpinner";
-import ConditionalRoute from "@/routes/ConditionalRoute";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { useDispatch, 
+  // useSelector 
+} from "react-redux";
+// import { RootState } from "@/store/store";
 import { loadUser } from "@/store/slices/authSlice";
 import DashboardLayout from "@/components/DashboardLayout";
 import { generateRandomPassword } from "@/utils/constant";
@@ -22,9 +21,9 @@ const Registration = () => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const dispatch = useDispatch<any>();
   // const { data: loadUserData } = useLoadUserQuery();
-  const authSlice = useSelector<RootState, UserStateProps>(
-    (state) => state.auth.user
-  );
+  // const authSlice = useSelector<RootState, UserStateProps>(
+  //   (state) => state.auth.user
+  // );
   const [login, { error: loginError, isError: loginIsError }]: any =
     useLoginMutation();
 
