@@ -7,6 +7,7 @@ import { UpdateStockDto } from './dto/updateStock.dto';
 import { EventEmitter2 } from '@nestjs/event-emitter'; // Import EventEmitter2 for event handling
 
 const LOW_STOCK_THRESHOLD = 10;
+const HIGH_STOCK_THRESHOLD = 100; // High stock threshold
 @Injectable()
 export class StockService {
   constructor(
@@ -33,6 +34,12 @@ export class StockService {
       if (savedInventory.quantity < LOW_STOCK_THRESHOLD) {
         this.eventEmitter.emit('stock.low', savedInventory); // Emit 'stock.low' event
       }
+
+       // Check if the new inventory has a high stock level
+      if (savedInventory.quantity > HIGH_STOCK_THRESHOLD) {
+        this.eventEmitter.emit('stock.high', savedInventory); // Emit 'stock.high' event
+      }
+
       return savedInventory;
     }
   
@@ -68,6 +75,11 @@ export class StockService {
         // Check if the updated inventory has a low stock level
         if (updatedInventory.quantity < LOW_STOCK_THRESHOLD) {
           this.eventEmitter.emit('stock.low', updatedInventory); // Emit 'stock.low' event
+        }
+
+        // Check if the updated inventory has a high stock level
+       if (updatedInventory.quantity > HIGH_STOCK_THRESHOLD) {
+         this.eventEmitter.emit('stock.high', updatedInventory); // Emit 'stock.high' event
         }
     
         return updatedInventory;
