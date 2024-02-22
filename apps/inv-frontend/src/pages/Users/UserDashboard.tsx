@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import ApexCharts from "apexcharts";
 import { useEffect, useRef, useState } from "react";
 import { Dropdown, DropdownItem } from "flowbite-react";
+import {Card} from "flowbite-react";
+import Image from 'next/image';
 
 
 const UserDashboard = () => {
@@ -584,7 +586,6 @@ const UserDashboard = () => {
                     Last 90 days
                   </DropdownItem>
                 </Dropdown>
-
                 <a
                   href="#"
                   className="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-gray-600 hover:text-red-700 dark:hover:text-red-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2"
@@ -611,6 +612,81 @@ const UserDashboard = () => {
           </div>
         </div>
       </div>
+        <div className="flex flex-col gap-4">
+          <div className="w-full">
+            <div className="flex items-center w-full">
+              <div className="font-bold text-black text-[1.5rem] leading-normal ">
+                {`Hello, ${loadUserData?.user?.firstName || ""} ${
+                  loadUserData?.user?.lastName || ""
+                }`}
+                <div className="flex space-x-12">
+                  <div className="relative top-152 left-240 bg-gray-100  w-569 h-164 p-8 rounded-lg ">
+                    <div className="mb-4 flex items-center justify-between  flex space-x-8">
+                      <h4>Expiring Soon</h4>
+                      <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                            See more
+                          </a>
+                    </div>
+                    <div className="mb-4 flex items-center justify-between flex space-x-8">
+                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                        imgAlt="image 1"
+                          horizontal >
+                            <div className="mb-4 flex items-center justify-between space-x-8">
+                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Potatoes</p>
+                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                Dry Pantry
+                              </a>
+                            </div>
+                            <p className="text-yellow-500 text-xs">Only 2 left in stock</p>
+                        </Card>
+                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                          horizontal >
+                            <div className="mb-4 flex items-center justify-between space-x-8">
+                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Mackrel Fish</p>
+                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                Fridge
+                              </a>
+                            </div>
+                            <p className="text-red-500 text-xs">Out of stock</p>
+                        </Card>
+                    </div>
+                  </div>
+                  <div className="relative top-152 left-240 bg-gray-100  w-569 h-164 p-8 rounded-lg">
+                    <div className="mb-4 flex items-center justify-between  flex space-x-8">
+                      <h4>Low Stock</h4>
+                      <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                            See more
+                          </a>
+                    </div>
+                    <div className="mb-4 flex items-center justify-between flex space-x-8">
+                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                        imgAlt="image 1"
+                          horizontal >
+                            <div className="mb-4 flex items-center justify-between space-x-8">
+                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Potatoes</p>
+                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                Dry Pantry
+                              </a>
+                            </div>
+                            <p className="text-yellow-500 text-xs">Only 2 left in stock</p>
+                        </Card>
+                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
+                          horizontal >
+                            <div className="mb-4 flex items-center justify-between space-x-8">
+                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Mackrel Fish</p>
+                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                Fridge
+                              </a>
+                            </div>
+                            <p className="text-red-500 text-xs">Out of stock</p>
+                        </Card>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>
     </DashboardLayout>
     //   </ConditionalRoute>
     // </ConditionalRoute>
