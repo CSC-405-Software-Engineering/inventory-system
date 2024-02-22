@@ -31,7 +31,7 @@ export class VerifyLogin implements CanActivate {
       });
       if (!payload.email) return false;
 
-      const auth = await this.authService.findAuthbyEmail(payload.email);
+      const auth = await this.authService.findByEmail(payload.email);
       const userResponse = new UserResponseDto(auth.user);
 
       request.user = userResponse;
