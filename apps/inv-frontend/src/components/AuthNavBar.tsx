@@ -128,7 +128,7 @@ const AuthNavBar = () => {
     </DropdownItem>
   ))}
   <DropdownDivider />
-  <DropdownItem  onClick={()=>{handleLogout}}>Sign out</DropdownItem>
+  <DropdownItem  onClick={handleLogout}>Sign out</DropdownItem>
 </Dropdown>
 
       

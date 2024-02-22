@@ -112,69 +112,69 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
         return acc;
     }, {} as { [name: string]: typeof InventoryItems.data });
 
-    return (
-        <DashboardLayout>
-            <div className="flex flex-col">
-                <div className="flex flex-row w-full justify-between mb-[35px]">
-                    <div className="flex flex-col">
-                        <p className="text-black font-[600] text-[28px] mb-[23px]">
-                            Pantry
-                        </p>
-                        <div className="flex flex-row gap-[17px] w-fit">
-                            {items.map((item, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => handleTabClick(index)}
-                                    className={index === activeTab ? "active" : ""}
-                                >
-                                    <div className="flex flex-row items-center gap-1 py-1.5">
-                                        {item.icon && item.icon(index === activeTab)}
-                                        <p
-                                            style={{
-                                                color: index === activeTab ? "#B11722" : "#9E9E9E",
-                                            }}
-                                            className="text-[12px] font-[600]"
-                                        >
-                                            {item.label}
-                                        </p>
-                                        <div
-                                            style={{
-                                                backgroundColor:
-                                                    index === activeTab ? "#EED4D5" : "#A4A4A457",
-                                                color: index === activeTab ? "#B11722" : "#939393",
-                                            }}
-                                            className="w-[25px] h-[16px] rounded-[9px] font-[600] text-[10px]"
-                                        >
-                                            {item.count}
-                                        </div>
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
+  return (
+    <DashboardLayout>
+      <div className="flex flex-col">
+        <div className="flex flex-row w-[80vw] justify-between mb-[35px]">
+          <div className="flex flex-col">
+            <p className="text-black font-[600] text-[28px] mb-[23px]">
+              Pantry
+            </p>
+            <div className="flex flex-row gap-[17px] w-fit">
+              {items.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleTabClick(index)}
+                  className={index === activeTab ? "active" : ""}
+                >
+                  <div className="flex flex-row items-center gap-1 py-1.5">
+                    {item.icon && item.icon(index === activeTab)}
+                    <p
+                      style={{
+                        color: index === activeTab ? "#B11722" : "#9E9E9E",
+                      }}
+                      className="text-[12px] font-[600]"
+                    >
+                      {item.label}
+                    </p>
+                    <div
+                      style={{
+                        backgroundColor:
+                          index === activeTab ? "#EED4D5" : "#A4A4A457",
+                        color: index === activeTab ? "#B11722" : "#939393",
+                      }}
+                      className="w-[25px] h-[16px] rounded-[9px] font-[600] text-[10px]"
+                    >
+                      {item.count}
                     </div>
-                    <div className="flex flex-col gap-[24px] items-end">
-                        <div className="flex flex-row gap-[8px] w-[360px] h-[36px] py-[18px] px-[16px] items-center rounded-[8px] border-[1px] border-[#D9D9D9] bg-white focus:ring-red-800">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                viewBox="0 0 20 20"
-                                fill="none"
-                            >
-                                <path
-                                    d="M12.5 12.0602C13.5229 11.1447 14.1667 9.81417 14.1667 8.33334C14.1667 5.57191 11.9281 3.33334 9.16666 3.33334C6.40523 3.33334 4.16666 5.57191 4.16666 8.33334C4.16666 11.0948 6.40523 13.3333 9.16666 13.3333C10.4472 13.3333 11.6154 12.8519 12.5 12.0602ZM12.5 12.0602L16.2732 15.8333"
-                                    stroke="#52525C"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                />
-                            </svg>
-                            <input
-                                type="text"
-                                placeholder="Search an item"
-                                className=" border-none py-0 focus:outline-none focus:bg-none focus:ring-0"
-                            />
-                            {/* <button className="bg-blue-500 text-white rounded-md px-3 py-2" title="Search">
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-[24px] items-end">
+            <div className="flex flex-row gap-[8px] w-[360px] h-[36px] py-[18px] px-[16px] items-center rounded-[8px] border-[1px] border-[#D9D9D9] bg-white focus:ring-red-800">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+              >
+                <path
+                  d="M12.5 12.0602C13.5229 11.1447 14.1667 9.81417 14.1667 8.33334C14.1667 5.57191 11.9281 3.33334 9.16666 3.33334C6.40523 3.33334 4.16666 5.57191 4.16666 8.33334C4.16666 11.0948 6.40523 13.3333 9.16666 13.3333C10.4472 13.3333 11.6154 12.8519 12.5 12.0602ZM12.5 12.0602L16.2732 15.8333"
+                  stroke="#52525C"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search an item"
+                className=" border-none py-0 focus:outline-none focus:bg-none focus:ring-0"
+              />
+              {/* <button className="bg-blue-500 text-white rounded-md px-3 py-2" title="Search">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M9 3a6 6 0 100 12A6 6 0 009 3zm5.707 11.293a1 1 0 01-1.414 1.414l-3.79-3.79a4.5 4.5 0 111.414-1.414l3.79 3.79z" clipRule="evenodd" />
                                     </svg>

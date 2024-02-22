@@ -34,9 +34,12 @@ const Login = () => {
       try {
         setIsLoginLoading(true);
         const response = await login(props);
+        console.log('response', response.data)
         if (response?.data?.access_token) {
           localStorage.setItem("token", response.data.access_token);
+          console.log('frontend', response.data.access_token)
           dispatch(loadUser());
+          console.log('authslice',authSlice)
         }
       } catch (error) {
         console.log(error);

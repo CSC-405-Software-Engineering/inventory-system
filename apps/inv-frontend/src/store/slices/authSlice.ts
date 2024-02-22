@@ -24,6 +24,7 @@ export const loadUser = createAsyncThunk<any, void>(
           headers: { "x-access-token": token },
         }
       );
+      console.log('The data', data);
       return data;
     } catch (e: any) {
       throw new Error(e.response.data.error.message);
@@ -52,7 +53,7 @@ const authSlice = createSlice({
     builder.addCase(loadUser.pending, (state) => ({ ...state }));
 
     builder.addCase(loadUser.fulfilled, (state, { payload }) => {
-      state.user = payload.user;
+      state.user = payload.data.user;
     });
 
     builder.addCase(loadUser.rejected, () => {

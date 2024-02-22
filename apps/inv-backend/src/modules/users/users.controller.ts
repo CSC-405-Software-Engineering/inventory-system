@@ -1,6 +1,8 @@
-import { Controller, Get, HttpStatus, Param, Patch, Res, Version } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Patch, Post, Req, Res, UseGuards, Version } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { VerifyLogin } from './verifylogin.strategy';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -11,14 +13,32 @@ export class UsersController {
   // GET programs?programName=Electrical%20Engineering
     @ApiOperation({ summary: 'Get all users' })
     @ApiResponse({ status: 200, description: 'Retrieve all users' })
-    @Get()
+    @Get('all')
     async findAll(@Res() response){
         try {
             const data = await this.usersService.findAll();
             response.status(HttpStatus.OK).json({
                 status: 'success',
                 message: 'Users retrieved successfully',
-                data: data,
+                data: data, 
+            });
+            
+        } catch (error) {
+            response.status(error.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
+              message: error.message,
+            });
+        }
+    }
+
+    @Version('1')
+    @UseGuards(VerifyLogin)
+    @Get('user')
+    async user(@Req() req, @Res() response){
+        try {
+            response.status(HttpStatus.OK).json({
+                status: 'success',
+                message: 'Users retrieved successfully',
+                data: { user: req.user },
             });
             
         } catch (error) {
@@ -45,5 +65,24 @@ export class UsersController {
               message: error.message,
             });
         }
+    }
+
+    
+    // @Version('1')
+    // // @UseGuards(VerifyLogin)
+    // @Get('user')
+    // @ApiOperation({ summary: 'get user' })
+    // @ApiResponse({ status: 201, description: 'User successfully fetched' })
+    // async user(@Res() res: any) {
+    //     console.log('Here in the user one')
+    //     return res.status(200).send({ user: "req.user "});
+    // }
+
+    
+
+    @Version('1')
+    @Post('register')
+    register(@Body() createUserDto: CreateUserDto) {
+      return this.usersService.register(createUserDto);
     }
 }

@@ -9,6 +9,10 @@ import {
 import ApexCharts from "apexcharts";
 import { useEffect, useRef, useState } from "react";
 import { Dropdown, DropdownItem } from "flowbite-react";
+import { Role, UserStateProps } from "@/store/interfaces/user.interface";
+import ConditionalRoute from "@/routes/ConditionalRoute";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const UserDashboard = () => {
   const {
@@ -22,6 +26,10 @@ const UserDashboard = () => {
   // );
 
   const [selectedOption, setSelectedOption] = useState("Today");
+
+  const authSlice = useSelector<RootState, UserStateProps>(
+    (state) => state.auth.user
+  );
 
   const options = {
     chart: {
@@ -324,11 +332,11 @@ const UserDashboard = () => {
   }, [options, options2]); // Adding options and options2 as dependencies
 
   return (
-    // <ConditionalRoute redirectTo="/login" condition={authSlice ? true : false}>
-    //   <ConditionalRoute
-    //     redirectTo="/404"
-    //     condition={authSlice?.auth?.role === Role.User ? true : false}
-    //   >
+    <ConditionalRoute redirectTo="/login" condition={authSlice ? true : false}>
+      <ConditionalRoute
+        redirectTo="/404"
+        condition={authSlice?.auth?.role === Role.User ? true : false}
+      >
     <DashboardLayout>
       <div className="flex flex-col gap-8">
         {/* Your existing elements */}
@@ -507,9 +515,9 @@ const UserDashboard = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M5 13V1m0 0L1 5m4-4 4 4"
                   />
                 </svg>
@@ -691,8 +699,8 @@ const UserDashboard = () => {
 
         </div>
     </DashboardLayout>
-    //   </ConditionalRoute>
-    // </ConditionalRoute>
+    </ConditionalRoute>
+    </ConditionalRoute>
   );
 };
 
