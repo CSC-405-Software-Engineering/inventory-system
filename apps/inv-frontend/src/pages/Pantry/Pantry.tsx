@@ -125,9 +125,9 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
                 <path
                   d="M12.5 12.0602C13.5229 11.1447 14.1667 9.81417 14.1667 8.33334C14.1667 5.57191 11.9281 3.33334 9.16666 3.33334C6.40523 3.33334 4.16666 5.57191 4.16666 8.33334C4.16666 11.0948 6.40523 13.3333 9.16666 13.3333C10.4472 13.3333 11.6154 12.8519 12.5 12.0602ZM12.5 12.0602L16.2732 15.8333"
                   stroke="#52525C"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               <input
