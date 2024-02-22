@@ -5,6 +5,7 @@ import AddListsModal from "@/components/AddListsModal";
 // import AddNew from "@/components/AddNew";
 import DashboardLayout from "@/components/DashboardLayout";
 import InventoryCategory from "@/components/InventoryCategory";
+import { useGetInventoryQuery } from "@/store/slices/appSlice";
 // import InventoryItem from "@/components/InventoryItem";
 import { ReactElement, useState } from "react";
 
@@ -20,66 +21,68 @@ type TabsWithIconsProps = {
     setActiveTab: (index: number) => void;
 };
 
-const InventoryItems = [
-    {
-        id: 0,
-        name: "Spinach",
-        amount: 10,
-        image: "https://images.pexels.com/photos/3298064/pexels-photo-3298064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        category: "Fruit"
-    },
-    {
-        id: 1,
-        name: "Carrot",
-        amount: 5,
-        image: "https://images.pexels.com/photos/65174/pexels-photo-65174.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Vegetable"
-    },
-    {
-        id: 2,
-        name: "Cabbage",
-        amount: 10,
-        image: "https://media.istockphoto.com/id/531009780/photo/green-cabbage.jpg?s=612x612&w=0&k=20&c=LLBTHOYDRlZSlWct-A_DJDuvVibQNr5ZvBV-c6J4b_s=",
-        category: "Vegetable"
-    },
-    {
-        id: 3,
-        name: "Pepper",
-        amount: 13,
-        image: "https://images.pexels.com/photos/870808/pexels-photo-870808.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Meat"
 
-    },
-    {
-        id: 4,
-        name: "Tomatoes",
-        amount: 21,
-        image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Meat"
-    },
-    {
-        id: 5,
-        name: "Tomatoes",
-        amount: 21,
-        image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Meat"
-    },
-    {
-        id: 6,
-        name: "Pepper",
-        amount: 13,
-        image: "https://images.pexels.com/photos/870808/pexels-photo-870808.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Meat"
 
-    },
-    {
-        id: 7,
-        name: "Tomatoes",
-        amount: 21,
-        image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
-        category: "Meat"
-    },
-];
+// const InventoryItems = [
+//     {
+//         id: 0,
+//         name: "Spinach",
+//         amount: 10,
+//         image: "https://images.pexels.com/photos/3298064/pexels-photo-3298064.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+//         category: "Fruit"
+//     },
+//     {
+//         id: 1,
+//         name: "Carrot",
+//         amount: 5,
+//         image: "https://images.pexels.com/photos/65174/pexels-photo-65174.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Vegetable"
+//     },
+//     {
+//         id: 2,
+//         name: "Cabbage",
+//         amount: 10,
+//         image: "https://media.istockphoto.com/id/531009780/photo/green-cabbage.jpg?s=612x612&w=0&k=20&c=LLBTHOYDRlZSlWct-A_DJDuvVibQNr5ZvBV-c6J4b_s=",
+//         category: "Vegetable"
+//     },
+//     {
+//         id: 3,
+//         name: "Pepper",
+//         amount: 13,
+//         image: "https://images.pexels.com/photos/870808/pexels-photo-870808.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Meat"
+
+//     },
+//     {
+//         id: 4,
+//         name: "Tomatoes",
+//         amount: 21,
+//         image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Meat"
+//     },
+//     {
+//         id: 5,
+//         name: "Tomatoes",
+//         amount: 21,
+//         image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Meat"
+//     },
+//     {
+//         id: 6,
+//         name: "Pepper",
+//         amount: 13,
+//         image: "https://images.pexels.com/photos/870808/pexels-photo-870808.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Meat"
+
+//     },
+//     {
+//         id: 7,
+//         name: "Tomatoes",
+//         amount: 21,
+//         image: "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=400",
+//         category: "Meat"
+//     },
+// ];
 
 
 const PantryTab: React.FC<TabsWithIconsProps> = ({
@@ -91,19 +94,23 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
         setActiveTab(index);
     };
 
+    const { data:InventoryItems, error: InventoryItemsError, isError: InventoryItemsIsError }: any =
+    useGetInventoryQuery();
+    console.log(InventoryItems?.data);
+
     const [openAddItemModal, setOpenAddItemModal] = useState(false);
 
     const handleAddItem = () => {
         setOpenAddItemModal(true);
     };
 
-    const groupedInventoryItems = InventoryItems.reduce((acc, item) => {
-        if (!acc[item.category]) {
-            acc[item.category] = [];
+    const groupedInventoryItems = InventoryItems?.data?.reduce((acc, item) => {
+        if (!acc[item.name]) {
+            acc[item.name] = [];
         }
-        acc[item.category].push(item);
+        acc[item.name].push(item);
         return acc;
-    }, {} as { [category: string]: typeof InventoryItems });
+    }, {} as { [name: string]: typeof InventoryItems.data });
 
     return (
         <DashboardLayout>
@@ -179,15 +186,15 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
                     </div>
                 </div>
                 {/* <InventoryCategory catName={item.category} inventoryItems={} /> */}
-                {Object.entries(groupedInventoryItems).map(([category, items]) => (
+                {groupedInventoryItems && Object.entries(groupedInventoryItems)?.map(([category, items]) => (
                     // Render InventoryCategory for each category
                     <InventoryCategory
                         key={category}
                         catName={category}
-                        inventoryItems={items.map(item => ({
-                            itemName: item.name,
-                            itemAmount: item.amount,
-                            itemImage: item.image,
+                        inventoryItems={items?.map((stock, index) => ({
+                            itemName: stock.name,
+                            itemAmount: stock.quantity,
+                            itemImage: stock.imageURL,
                         }))}
                     />
                 ))}

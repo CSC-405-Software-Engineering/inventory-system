@@ -97,7 +97,7 @@ const InventoryCategory: React.FC<InventoryCategoryProps> = (
             <div className="flex flex-row w-[100%] gap-14 mb-[35px]">
                 <AddNew onClick={handleAddItem} />
                 <div className="flex justify-start flex-row gap-14" style={{ overflowX: "auto"}}>
-                    {inventoryItems.map((item, index) => (
+                    {inventoryItems?.map((item, index) => (
                         <InventoryItem
                             key={index}  // Using the index as a key, consider using a more stable ID if available
                             items={[{
