@@ -18,6 +18,7 @@ export class StockController {
     return await this.stockService.create(createStockDto);
   }
 
+  @Version('1')
   @Get()
   @ApiOperation({ summary: 'Get all stock' })
   @ApiResponse({ status: 200, description: 'Stock successfully retrieved' })
@@ -41,7 +42,7 @@ export class StockController {
   }
 
 
-  // @Version('1')
+  @Version('1')
   @Get(':id')
   @ApiOperation({ summary: 'Get Stock by ID' })
   @ApiResponse({ status: 200, description: 'Stock successfully retrieved' })
@@ -63,7 +64,8 @@ export class StockController {
 
     }
   }
-   
+  
+  @Version('1')
   @Patch(':id')
   @ApiOperation({ summary: 'Update Stock by ID' })
   @ApiResponse({ status: 200, description: 'Stock successfully updated' })
@@ -87,6 +89,7 @@ export class StockController {
     }
   }
 
+  @Version('1')
   @Delete(':id')
   @ApiOperation({ summary: 'Delete stock by ID' })
   @ApiResponse({ status: 200, description: 'Stock successfully deleted' })

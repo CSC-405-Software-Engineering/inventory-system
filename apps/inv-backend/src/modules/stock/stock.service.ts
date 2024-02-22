@@ -32,18 +32,10 @@ export class StockService {
       }
 
       const newStock = this.stockRepository.create({
-        name: createStockDto.name,
+        ...createStockDto,
         inventory: await this.inventoryService.findOne(createStockDto.inventoryId),
-        imageURL: "",
-        minStock: createStockDto.minStock,
-        maxStock: createStockDto.maxStock,
-        quantity: createStockDto.quantity,
-        unitPrice: createStockDto.unitPrice,
-        location: createStockDto.location,
-        expirationDate: createStockDto.expirationDate,
+        
       });
-
-      console.log('newStock', newStock);
 
       return await this.stockRepository.save(newStock);
 
@@ -84,7 +76,7 @@ export class StockService {
           // this.eventEmitter.emit('stock.low', updatedInventory); // Emit 'stock.low' event
 
           // Send email notification
-          this.notificationService.minimumStockEmail({email: '', stock: updatedStock, quantity: updatedStock.quantity}); 
+          // this.notificationService.minimumStockEmail({email: '', stock: updatedStock, quantity: updatedStock.quantity}); 
         }
     
         return updatedStock;
