@@ -41,10 +41,10 @@ export class InventoryService {
         const options: FindOneOptions<Inventory> = {
             where: { id },
         };
-
-        const order = await this.inventoryRepository.findOne(options);
-        return order;
-    }
+    
+        const inventory = await this.inventoryRepository.findOne(options);
+        return inventory;
+      }
 
     async remove(id: string): Promise<Inventory> {
         const existingInventory = await this.inventoryRepository.findOne({ where: { id } });
