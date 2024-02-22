@@ -10,7 +10,7 @@ export const LoginSchema = Yup.object().shape({
     firstname: Yup.string().required("Insert your firstname"),
     lastname: Yup.string().required("Insert your lastname"),
     email: Yup.string().required("Insert your email"),
-    role: Yup.string().required("Insert your role"),
-    password: Yup.string().required("Insert your password"),
+    role: Yup.string().required("Select your role"),
+    password: Yup.string().required("Generate your password"),
   });
   

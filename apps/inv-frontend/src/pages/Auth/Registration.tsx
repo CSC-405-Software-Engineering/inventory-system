@@ -16,9 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { loadUser } from "@/store/slices/authSlice";
 import DashboardLayout from "@/components/DashboardLayout";
+import { generateRandomPassword } from "@/utils/constant";
 
 const Registration = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const dispatch = useDispatch<any>();
   // const { data: loadUserData } = useLoadUserQuery();
@@ -47,8 +47,8 @@ const Registration = () => {
 
   return (
     <DashboardLayout>
-      <p className="black text-[2rem] font-bold">Register User</p>
-      <div className="flex flex-col justify-center w-full max-w-[62rem] gap-8 bg-white rounded-[1.1875rem] p-8 ml-10">
+      <p className="black text-[2rem] font-bold mb-8">Register User</p>
+      <div className="flex flex-col justify-center w-full max-w-[62rem] bg-[#FBFBFB] gap-8 rounded-[1.1875rem] p-8">
         <Formik
           initialValues={{
             firstname: "",
@@ -72,11 +72,11 @@ const Registration = () => {
                     </span>
                   </Alert>
                 )}
-                <div className="flex flex-row space-x-20">
-                  <div className="flex flex-col gap-2 w-2/3">
-                    <p className="text-[#52525C] text-xl">First Name</p>
+                <div className="flex flex-col md:flex-row gap-6 md:gap-20">
+                  <div className="flex flex-col w-full gap-2 md:w-2/3">
+                    <p className="text-[#52525C] text-base">Firstname</p>
                     <input
-                      className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch gap-2 items-center"
+                      className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] w-full self-stretch gap-2 items-center"
                       type="email"
                       onChange={(e) =>
                         setFieldValue("firstname", e.target.value)
@@ -89,8 +89,8 @@ const Registration = () => {
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col gap-2  w-2/3">
-                    <p className="text-[#52525C] text-xl">Last Name</p>
+                  <div className="flex flex-col w-full gap-2 md:w-2/3">
+                    <p className="text-[#52525C] text-base">Lastname</p>
                     <input
                       className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch gap-2 items-center"
                       type="email"
@@ -106,9 +106,9 @@ const Registration = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex flex-row space-x-20">
-                  <div className="flex flex-col gap-2 w-2/3">
-                    <p className="text-[#52525C] text-xl">Email</p>
+                <div className="flex flex-col md:flex-row gap-6 md:gap-20">
+                  <div className="flex flex-col w-full gap-2 md:w-2/3">
+                    <p className="text-[#52525C] text-base">Email</p>
                     <input
                       className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch gap-2 items-center"
                       type="email"
@@ -121,48 +121,52 @@ const Registration = () => {
                       </p>
                     )}
                   </div>
-                  <div className="flex flex-col gap-2  w-2/3">
-                    <p className="text-[#52525C] text-xl">Role</p>
+                  <div className="flex flex-col w-full gap-2 md:w-2/3">
+                    <p className="text-[#52525C] text-base">Role</p>
                     <select
                       className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch gap-2 items-center"
                       onChange={(e) => setFieldValue("role", e.target.value)}
-                    />
-                    {errors && errors.email && (
+                    >
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                    </select>
+                    {errors && errors.role && (
                       <p className="text-[12px] mt-1 text-custom-danger">
-                        {errors.email}
+                        {errors.role}
                       </p>
                     )}
                   </div>
                 </div>
-                <div className="flex flex-row gap-2">
-                  <div className="flex flex-col gap-2 w-1/3">
-                    <p className="text-[#52525C] text-xl">Password</p>
-                    <div className="relative">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-20">
+                  <div className="flex flex-col w-full gap-2 md:w-2/3">
+                    <p className="text-[#52525C] text-base">Password</p>
+                    <div className="flex flex-col md:flex-row gap-6 justify-between">
                       <input
-                        className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch w-full gap-2 items-center"
-                        type={showPassword ? "text" : "password"}
+                        className=" flex shadow-none px-4 py-3 bg-white rounded-lg border-2 border-[#D9D9D9] self-stretch md:w-full items-center"
+                        type={"text"}
                         value={values["password"]}
-                        placeholder={
-                          showPassword ? "Enter your password" : "***********"
-                        }
-                        onChange={(e) =>
-                          setFieldValue("password", e.target.value)
-                        }
+                        placeholder={"***********"}
+                        disabled
                       />
-                      <div className="absolute inset-y-0 right-0 p-4 flex items-center">
-                        <button
-                          onClick={() => setShowPassword(!showPassword)}
-                          aria-label={
-                            showPassword ? "Hide Password" : "Show Password"
-                          }
-                        >
-                          {showPassword ? (
-                            <LiaEyeSlashSolid />
-                          ) : (
-                            <LiaEyeSolid />
-                          )}
-                        </button>
-                      </div>
+                      <button
+                        className={`${
+                          isLoginLoading ? "bg-custom-primary-1" : "bg-white"
+                        }  ${
+                          isLoginLoading
+                            ? "border-custom-primary-1"
+                            : "border-white"
+                        }  font-bold rounded-[0.3125rem] whitespace-nowrap self-end border-custom-primary-1 border  text-custom-primary-1 px-4 h-[2.5rem] justify-center w-fit items-center hover:bg-custom-primary-1 hover:border hover:border-white hover:text-white`}
+                        disabled={isLoginLoading}
+                        onClick={() => {
+                          setFieldValue("password", generateRandomPassword());
+                        }}
+                      >
+                        {isLoginLoading ? (
+                          <ButtonSpinner />
+                        ) : (
+                          "Generate Password"
+                        )}
+                      </button>
                     </div>
                     {errors && errors.password && (
                       <p className="text-[12px] mt-1 text-custom-danger">
@@ -170,17 +174,21 @@ const Registration = () => {
                       </p>
                     )}
                   </div>
-                  <button
-                  className={`${
-                    isLoginLoading ? "bg-white" : "bg-custom-accent-1"
-                  }  ${
-                    isLoginLoading ? "border-custom-accent-1" : "border-white"
-                  }  font-bold rounded-[0.3125rem]  text-white w-full h-[2.5rem] justify-center items-center hover:bg-white hover:border hover:border-custom-accent-1 hover:text-custom-accent-1`}
-                  type="submit"
-                  disabled={isLoginLoading}
-                >
-                  {isLoginLoading ? <ButtonSpinner /> : "Register"}
-                </button>
+                  <div className=" flex self-end justify-end w-full gap-2 md:w-2/3">
+                    <button
+                      className={`${
+                        isLoginLoading ? "bg-white" : "bg-custom-primary-1"
+                      }  ${
+                        isLoginLoading
+                          ? "border-custom-primary-1"
+                          : "border-white"
+                      }  font-bold rounded-[0.3125rem]  text-white w-fit h-[2.5rem] px-4 justify-center items-center self-end hover:bg-white hover:border hover:border-custom-primary-1 hover:text-custom-primary-1`}
+                      type="submit"
+                      disabled={isLoginLoading}
+                    >
+                      {isLoginLoading ? <ButtonSpinner /> : "Register"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </Form>
