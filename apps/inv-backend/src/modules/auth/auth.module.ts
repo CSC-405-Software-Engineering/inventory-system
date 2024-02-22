@@ -7,7 +7,6 @@ import { Auth } from './entities/auth.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { PasswordService } from './password.service';
-// import { UsersService } from '../users/users.service';
 
 @Module({
   imports: [
