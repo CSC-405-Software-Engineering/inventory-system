@@ -9,9 +9,6 @@ import { useSelector } from "react-redux";
 import ApexCharts from "apexcharts";
 import { useEffect, useRef, useState } from "react";
 import { Dropdown, DropdownItem } from "flowbite-react";
-import {Card} from "flowbite-react";
-import Image from 'next/image';
-
 
 const UserDashboard = () => {
   const {
@@ -345,9 +342,88 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        <div className="flex flex-row gap-4">
+        <div className="flex md:flex-row flex-col w-full gap-6 my-4">
+        <div className="flex flex-col gap-4 w-full bg-gray-100 px-6 py-8  rounded-lg">
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-black text-[0.875rem] font-semibold">Low Stock</p>
+                      <p className="text-[0.75rem] font-semibold text-[#939393]">
+                            See more
+                          </p>
+                    </div>
+                    <div className="items-center justify-between flex md:flex-row flex-col w-full gap-4">
+                        <div className="w-full flex p-4 bg-white rounded-[0.625rem] h-20 items-center shadow-md gap-3"
+                         >
+                            <img src="/assets/images/potato.png" className="w-[27.26px] h-[25.47px]"/>
+                            <div className="flex flex-col w-full gap-2">
+                            <div className="flex items-center justify-between w-full">
+                            <p className="text-[0.75rem] leading-none text-[#939393] font-bold">Potatoes</p>
+                            <p className="text-[0.625rem] font-semibold text-[#939393]">
+                                Dry Pantry
+                              </p>
+                            </div>
+                            
+                            <p className="text-[#FFA519] text-[0.625rem]">Only 2 left in stock</p>
+                            </div>
+                        </div>
+                        <div className="w-full flex p-4 bg-white rounded-[0.625rem] h-20 items-center shadow-md gap-3"
+                         >
+                            <img src="/assets/images/potato.png" className="w-[27.26px] h-[25.47px]"/>
+                            <div className="flex flex-col w-full gap-2">
+                            <div className="flex items-center justify-between w-full">
+                            <p className="text-[0.75rem] leading-none text-[#939393] font-bold">Potatoes</p>
+                            <p className="text-[0.625rem] font-semibold text-[#939393]">
+                                Dry Pantry
+                              </p>
+                            </div>
+                            
+                            <p className="text-[#FFA519] text-[0.625rem]">Only 2 left in stock</p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-4 w-full bg-gray-100 px-6 py-8 rounded-lg">
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-black text-[0.875rem] font-semibold">Low Stock</p>
+                      <p className="text-[0.75rem] font-semibold text-[#939393]">
+                            See more
+                          </p>
+                    </div>
+                    <div className="items-center justify-between flex md:flex-row flex-col w-full gap-4">
+                        <div className="w-full flex p-4 bg-white rounded-[0.625rem] h-20 items-center shadow-md gap-3"
+                         >
+                            <img src="/assets/images/potato.png" className="w-[27.26px] h-[25.47px]"/>
+                            <div className="flex flex-col w-full gap-2">
+                            <div className="flex items-center justify-between w-full">
+                            <p className="text-[0.75rem] leading-none text-[#939393] font-bold">Potatoes</p>
+                            <p className="text-[0.625rem] font-semibold text-[#939393]">
+                                Dry Pantry
+                              </p>
+                            </div>
+                            
+                            <p className="text-[#FFA519] text-[0.625rem]">Only 2 left in stock</p>
+                            </div>
+                        </div>
+                        <div className="w-full flex p-4 bg-white rounded-[0.625rem] h-20 items-center shadow-md gap-3"
+                         >
+                            <img src="/assets/images/potato.png" className="w-[27.26px] h-[25.47px]"/>
+                            <div className="flex flex-col w-full gap-2">
+                            <div className="flex items-center justify-between w-full">
+                            <p className="text-[0.75rem] leading-none text-[#939393] font-bold">Potatoes</p>
+                            <p className="text-[0.625rem] font-semibold text-[#939393]">
+                                Dry Pantry
+                              </p>
+                            </div>
+                            
+                            <p className="text-[#FFA519] text-[0.625rem]">Only 2 left in stock</p>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+        <div className="flex flex-col md:flex-row gap-6 md:gap-4">
           {/* AreA chart */}
-          <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 grid grid-cols-1">
+          <div className=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6 grid grid-cols-1">
             {/* Header section */}
             <div className="flex justify-between">
               <div>
@@ -390,7 +466,7 @@ const UserDashboard = () => {
             {/* Your additional content below the chart (optional) */}
             <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between pt-5">
               <div className="flex justify-between items-center">
-                <Dropdown label={selectedOption} placement="top">
+                <Dropdown color="red" label={selectedOption} placement="top">
                   <DropdownItem onClick={() => setSelectedOption("Today")}>
                     Today
                   </DropdownItem>
@@ -414,33 +490,13 @@ const UserDashboard = () => {
                   </DropdownItem>
                 </Dropdown>
 
-                <a
-                  href="#"
-                  className="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-gray-600 hover:text-red-700 dark:hover:text-red-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2"
-                >
-                  Users Report
-                  <svg
-                    className="w-2.5 h-2.5 ms-1.5 rtl:rotate-180"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 6 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 9 4-4-4-4"
-                    />
-                  </svg>
-                </a>
+               
               </div>
             </div>
           </div>
 
           {/* Column chart */}
-          <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+          <div className=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
             <div className="flex justify-between border-gray-200 border-b dark:border-gray-700 pb-3">
               <dl>
                 <dt className="text-base font-normal text-gray-500 dark:text-gray-400 pb-1">
@@ -480,7 +536,7 @@ const UserDashboard = () => {
             {/* Your additional content below the chart (optional) */}
             <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between pt-5">
               <div className="flex justify-between items-center">
-                <Dropdown label={selectedOption} placement="top">
+                <Dropdown color="red" label={selectedOption} placement="top">
                   <DropdownItem onClick={() => setSelectedOption("Today")}>
                     Today
                   </DropdownItem>
@@ -504,33 +560,13 @@ const UserDashboard = () => {
                   </DropdownItem>
                 </Dropdown>
 
-                <a
-                  href="#"
-                  className="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-gray-600 hover:text-red-700 dark:hover:text-red-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2"
-                >
-                  Users Report
-                  <svg
-                    className="w-2.5 h-2.5 ms-1.5 rtl:rotate-180"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 6 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 9 4-4-4-4"
-                    />
-                  </svg>
-                </a>
+               
               </div>
             </div>
           </div>
 
           {/* Column chart */}
-          <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+          <div className=" w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
             <div className="flex justify-between border-gray-200 border-b dark:border-gray-700 pb-3">
               <dl>
                 <dt className="text-base font-normal text-gray-500 dark:text-gray-400 pb-1">
@@ -563,7 +599,7 @@ const UserDashboard = () => {
             {/* Your additional content below the chart (optional) */}
             <div className="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between pt-5">
               <div className="flex justify-between items-center">
-                <Dropdown label={selectedOption} placement="top">
+                <Dropdown  color="red" label={selectedOption} placement="top">
                   <DropdownItem onClick={() => setSelectedOption("Today")}>
                     Today
                   </DropdownItem>
@@ -586,107 +622,15 @@ const UserDashboard = () => {
                     Last 90 days
                   </DropdownItem>
                 </Dropdown>
-                <a
-                  href="#"
-                  className="uppercase text-sm font-semibold inline-flex items-center rounded-lg text-gray-600 hover:text-red-700 dark:hover:text-red-500  hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 px-3 py-2"
-                >
-                  Users Report
-                  <svg
-                    className="w-2.5 h-2.5 ms-1.5 rtl:rotate-180"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 6 10"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m1 9 4-4-4-4"
-                    />
-                  </svg>
-                </a>
+             
               </div>
             </div>
           </div>
         </div>
       </div>
-        <div className="flex flex-col gap-4">
-          <div className="w-full">
-            <div className="flex items-center w-full">
-              <div className="font-bold text-black text-[1.5rem] leading-normal ">
-                {`Hello, ${loadUserData?.user?.firstName || ""} ${
-                  loadUserData?.user?.lastName || ""
-                }`}
-                <div className="flex space-x-12">
-                  <div className="relative top-152 left-240 bg-gray-100  w-569 h-164 p-8 rounded-lg ">
-                    <div className="mb-4 flex items-center justify-between  flex space-x-8">
-                      <h4>Expiring Soon</h4>
-                      <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                            See more
-                          </a>
-                    </div>
-                    <div className="mb-4 flex items-center justify-between flex space-x-8">
-                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
-                        imgAlt="image 1"
-                          horizontal >
-                            <div className="mb-4 flex items-center justify-between space-x-8">
-                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Potatoes</p>
-                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                Dry Pantry
-                              </a>
-                            </div>
-                            <p className="text-yellow-500 text-xs">Only 2 left in stock</p>
-                        </Card>
-                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
-                          horizontal >
-                            <div className="mb-4 flex items-center justify-between space-x-8">
-                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Mackrel Fish</p>
-                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                Fridge
-                              </a>
-                            </div>
-                            <p className="text-red-500 text-xs">Out of stock</p>
-                        </Card>
-                    </div>
-                  </div>
-                  <div className="relative top-152 left-240 bg-gray-100  w-569 h-164 p-8 rounded-lg">
-                    <div className="mb-4 flex items-center justify-between  flex space-x-8">
-                      <h4>Low Stock</h4>
-                      <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                            See more
-                          </a>
-                    </div>
-                    <div className="mb-4 flex items-center justify-between flex space-x-8">
-                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
-                        imgAlt="image 1"
-                          horizontal >
-                            <div className="mb-4 flex items-center justify-between space-x-8">
-                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Potatoes</p>
-                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                Dry Pantry
-                              </a>
-                            </div>
-                            <p className="text-yellow-500 text-xs">Only 2 left in stock</p>
-                        </Card>
-                        <Card className="max-w-sm top-55 left-20 w-253 h-78"
-                          horizontal >
-                            <div className="mb-4 flex items-center justify-between space-x-8">
-                            <p className="text-base font-bold leading-none text-gray-900 dark:text-white">Mackrel Fish</p>
-                              <a href="#" className="text-sm font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                Fridge
-                              </a>
-                            </div>
-                            <p className="text-red-500 text-xs">Out of stock</p>
-                        </Card>
-                    </div>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        </div>
+        
+                
+            
     </DashboardLayout>
     //   </ConditionalRoute>
     // </ConditionalRoute>
