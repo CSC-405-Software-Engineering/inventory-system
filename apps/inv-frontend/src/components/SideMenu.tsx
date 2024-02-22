@@ -46,7 +46,7 @@ const SideMenu = () => {
       icon: <RegistrationIcon />,
       isActive: false,
     },
-    
+
   ];
 
   useEffect(() => {
@@ -67,45 +67,43 @@ const SideMenu = () => {
   return (
     <div className="flex flex-col h-full justify-between">
       <div className="flex flex-col justify-between h-full mt-28">
-<div className="flex flex-col  gap-4">
-        {menus.map(({ title, link, icon }, index) => (
-          <Link to={`/${link}`} key={index}>
-            <button
-              className={` ${
-                menu === index ? "bg-custom-primary-1 " : ""
-              } w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
-            >
-              {cloneElement(icon, { isActive: menu === index })}
-              <span className={`${
-                menu === index ? "text-white " : ""
-              }text-black text-center text-base font-medium`}>
-                {title}
-              </span>
-            </button>
-          </Link>
-        ))}
+        <div className="flex flex-col  gap-4">
+          {menus.map(({ title, link, icon }, index) => (
+            <Link to={`/${link}`} key={index}>
+              <button
+                className={` ${menu === index ? "bg-custom-primary-1 " : ""
+                  } w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
+              >
+                {cloneElement(icon, { isActive: menu === index })}
+                <span className={`${menu === index ? "text-white " : ""
+                  }text-black text-center text-base font-medium`}>
+                  {title}
+                </span>
+              </button>
+            </Link>
+          ))}
         </div>
         <div className="flex flex-col gap-4">
-        <Link to={`/settings`}>
+          <Link to={`/settings`}>
             <button
               className={`w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
             >
-              {cloneElement(<SettingsIcon/>, { isActive: menu === 3 })}
+              {cloneElement(<SettingsIcon />, { isActive: menu === 3 })}
               <span className={`text-black text-center text-base font-medium`}>
                 Settings
               </span>
             </button>
           </Link>
-        <button
-          className={` w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
-          onClick={handleLogout}
-        >
-          {cloneElement(<LogoutIcon />)}
-          <span className={`text-black text-center text-base font-medium`}>
-            Logout
-          </span>
-        </button>
-      </div>
+          <button
+            className={` w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
+            onClick={handleLogout}
+          >
+            {cloneElement(<LogoutIcon />)}
+            <span className={`text-black text-center text-base font-medium`}>
+              Logout
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   );
