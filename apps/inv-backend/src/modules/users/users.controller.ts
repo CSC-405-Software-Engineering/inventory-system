@@ -15,11 +15,11 @@ export class UsersController {
     async findAll(@Res() response){
         try {
             const data = await this.usersService.findAll();
-            return {
+            response.status(HttpStatus.OK).json({
                 status: 'success',
                 message: 'Users retrieved successfully',
                 data: data,
-            };
+            });
             
         } catch (error) {
             response.status(error.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
@@ -35,11 +35,11 @@ export class UsersController {
     async findOne(@Param('id') id: string, @Res() response){
         try {
             const data = await this.usersService.findById(id);
-            return {
+            response.status(HttpStatus.OK).json({
                 status: 'success',
                 message: 'User retrieved successfully',
                 data: data,
-            };
+            });
         } catch (error) {
             response.status(error.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
               message: error.message,

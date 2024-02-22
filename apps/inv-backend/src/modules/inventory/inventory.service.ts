@@ -50,12 +50,15 @@ export class InventoryService {
     return await this.inventoryRepository.find();
   }
 
-  async findOne(id: string): Promise<Inventory | null> {
-    const options: FindOneOptions<Inventory> = {
-      where: { id },
-    };
+  async findOne(id: string){
+    console.log('here')
+    const inventory = await this.inventoryRepository.findOne({where: {id}});
+    console.log('inventory', inventory)
+    if (!inventory) {
+      throw new NotFoundException(`Inventory with ID "${id}" not found`);
+    }
 
-    return await this.inventoryRepository.findOne(options);
+    return inventory;
   }
 
   async remove(id: string): Promise<Inventory> {

@@ -28,11 +28,11 @@ export class StockController {
   async create(@Body() createStockDto: CreateStockDto, @Res() response) {
     try {
       const stock = await this.stockService.create(createStockDto);
-      return {
+      response.status(HttpStatus.CREATED).json({
         status: 'success',
         message: 'Stock created successfully',
         data: stock,
-      };
+      });
     } catch (error) {
       response.status(error.status || HttpStatus.INTERNAL_SERVER_ERROR).json({
         message: error.message,
