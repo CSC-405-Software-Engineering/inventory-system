@@ -421,7 +421,7 @@ const UserDashboard = () => {
                   </div>
                 </div>
         
-         <div className="grid md:grid-cols-3 grid-cols-2 lg:grid-cols-4 gap-6 font-semibold">
+         <div className="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-4 gap-6 font-semibold">
          <div className="bg-[#FBFBFB] p-4 shadow-md flex flex-col gap-4 rounded-lg overflow-hidden">
   <p className="text-sm">Number of items</p>
   <div className="flex justify-between relative">
