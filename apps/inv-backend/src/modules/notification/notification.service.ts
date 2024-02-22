@@ -36,7 +36,33 @@ export class NotificationService {
         quantity, 
       },
     });
+  };
+
+  async maximumStockEmail(data) {
+    const { email, stock, quantity } = data;
+
+    const subject = `Max Stock for ${stock} has been reached`;
+    
+    const htmlContent = await ejs.renderFile(
+        './notification/emails/maximum.html',
+        {
+          stock,
+          quantity,
+        }
+      );
+
+
+    await this.mailerService.sendMail({
+      to: email,
+      subject,
+      html: htmlContent,
+      context: {
+        stock,
+        quantity, 
+      },
+    });
   }
+
 }
 
 

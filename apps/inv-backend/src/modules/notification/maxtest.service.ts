@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { NotificationModule } from './notification.module';
 import { NotificationService } from './notification.service';
 
-async function testMinimumStockEmail() {
+async function testMaximumStockEmail() {
     const app = await NestFactory.createApplicationContext(NotificationModule);
   
     const notificationService = app.get(NotificationService);
@@ -11,12 +11,12 @@ async function testMinimumStockEmail() {
     const testData = {
       email: 'kaobimdiiwelumo@gmail.com',
       stock: 'ExampleStock',
-      quantity: 5,
+      quantity: 1000,
     };
   
     try {
-      // Call the minimumStockEmail function
-      await notificationService.minimumStockEmail(testData);
+      // Call the maximumStockEmail function
+      await notificationService.maximumStockEmail(testData);
       console.log('Email sent successfully!');
     } catch (error) {
       console.error('Error sending email:', error);
@@ -27,6 +27,4 @@ async function testMinimumStockEmail() {
   }
   
   // Execute the test function
-  testMinimumStockEmail();
-
-  
+  testMaximumStockEmail();
