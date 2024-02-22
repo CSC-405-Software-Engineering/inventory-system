@@ -1,6 +1,16 @@
-const AddNew = () => {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
+
+type AddNewProps= {
+    // onClick:() => void;
+    onClick: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const AddNew:React.FC<AddNewProps> = (
+    {onClick},
+) => {
     return (
-        <div className="w-[159px] h-[157px] flex flex-col bg-[#FF6B000A] border-[2px] border-dashed border-[#B11722] rounded-[20px] justify-end items-center pt-[31px] pb-[24px] px-[18px] gap-[20px]">
+        <div style={{cursor: "pointer"}} onClick={onClick} className="w-[159px] h-[157px] flex flex-col bg-[#FF6B000A] border-[2px] border-dashed border-[#B11722] rounded-[20px] justify-end items-center pt-[31px] pb-[24px] px-[18px] gap-[20px]">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
                     <g clip-path="url(#clip0_363_110)">
