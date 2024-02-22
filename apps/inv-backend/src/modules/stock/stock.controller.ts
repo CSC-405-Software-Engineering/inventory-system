@@ -10,7 +10,7 @@ import { StockService } from './stock.service';
 export class StockController {
   constructor(private readonly stockService: StockService) {}
 
-  @Post()
+  @Post('create')
   @ApiOperation({ summary: 'Create a new stock' })
   @ApiResponse({ status: 201, description: 'Stock successfully created' })
   async create(@Body() createStockDto: CreateStockDto, @Res() response) {
