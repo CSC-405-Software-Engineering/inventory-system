@@ -14,7 +14,6 @@ export class StockService {
   constructor(
     @InjectRepository(Stock)
     private readonly stockRepository: Repository<Stock>,
-    // private eventEmitter: EventEmitter2, 
     private readonly notificationService: NotificationService,
     private readonly inventoryService: InventoryService,
   ) {}
