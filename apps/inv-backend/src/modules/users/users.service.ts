@@ -2,8 +2,6 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-// import { CreateUserDto } from './dto/create-user.dto';
-// import * as bcrypt from 'bcrypt';
 import { Auth } from '../auth/entities/auth.entity';
 
 @Injectable()
@@ -23,4 +21,17 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { id} });
   }
 
+  async findAll() {
+    return await this.userRepository.find();
+  }
+
+  async update(id: string, firstName: string, lastName: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new ConflictException(`User with ID ${id} not found`);
+    }
+    user.firstName = firstName;
+    user.lastName = lastName;
+    return await this.userRepository.save(user);
+  }
 }
