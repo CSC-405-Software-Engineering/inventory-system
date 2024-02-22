@@ -1,6 +1,4 @@
-import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
-import PropTypes from "prop-types";
+import {  Modal } from "flowbite-react";
 
 interface EditItemQuantityModalProps {
   openModal: boolean;
@@ -11,12 +9,7 @@ const EditItemQuantityModal = ({
   openModal,
   setOpenModal,
 }: EditItemQuantityModalProps) => {
-  const [openStatusModal, setOpenStatusModal] = useState(false);
 
-  const handleEnrollCourse = () => {
-    setOpenModal(false);
-    setOpenStatusModal(true);
-  };
 
   return (
     <>
@@ -91,13 +84,11 @@ const EditItemQuantityModal = ({
           <div className="flex ">
             <button
               className="  bg-white text-red-500 hover:bg-slate-50 border border-solid border-black rounded-md hover:border-transparent hover:text-red px-20 mr-5 p-2"
-              onClick={handleEnrollCourse}
             >
               Cancel
             </button>
             <button
               className=" bg-red-800 text-white hover:bg-red-600 border-style:solid rounded-md border-color:rgb(0 0 0) ml-5 hover:text-white px-20 "
-              onClick={handleEnrollCourse}
             >
               Save
             </button>

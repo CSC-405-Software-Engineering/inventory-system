@@ -20,6 +20,7 @@ const Pantry = () => {
         openModal={openQuatityModal}
         setOpenModal={setOpenQuatityModal}
       />
+      </>
 
     </DashboardLayout>
   );

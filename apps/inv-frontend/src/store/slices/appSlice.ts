@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LoginProps } from "../interfaces/user.interface";
+import { LoginProps, RegistrationProps } from "../interfaces/user.interface";
 import { setAuthToken } from "./authSlice";
 
 // Define the base query
@@ -74,6 +74,23 @@ export const appApi = createApi({
       },
     }),
 
+    registration: builder.mutation<any, RegistrationProps>({
+      query: (credentials) => ({
+        url: "/v1/auth/register",
+        method: "POST",
+        body: credentials,
+      }),
+      // invalidatesTags: ["User"],
+      onQueryStarted: async (_:any, { dispatch, queryFulfilled }) => {
+        try {
+          const { data } = await queryFulfilled;
+          console.log(data);
+        } catch(error) {
+          dispatch(setAuthToken(null));
+        }
+      },
+    }),
+
     getCurrentSession: builder.query<any, void>({
       query: () => "v1/sessions/current",
     }),
@@ -97,6 +114,7 @@ export const {
   useGetHelloV1Query,
   useGetHelloV2Query,
   useLoginMutation,
+  useRegistrationMutation,
   useGetCoursesQuery,
   useLoadUserQuery,
   useGetInventoryQuery,
