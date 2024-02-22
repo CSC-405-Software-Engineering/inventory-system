@@ -7,7 +7,6 @@ import AuthNavBar from "@/components/AuthNavBar";
 import InventoryItem from "@/components/InventoryItem";
 import SideMenu from "@/components/SideMenu";
 import { ReactElement, useState } from "react";
-import { addMethod } from "yup";
 
 type TabItem = {
     label: string;
