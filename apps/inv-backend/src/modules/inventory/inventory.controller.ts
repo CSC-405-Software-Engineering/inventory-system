@@ -4,12 +4,14 @@ import { CreateInventoryDto } from './dto/createInventory.dto';
 import { UseGuards } from '@nestjs/common/decorators';
 import { JwtAuthGuard } from '../auth/guard/jwt-auth.guard';
 import { Request } from 'express';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('inventory')
 export class InventoryController {
     constructor(private readonly inventoryService: InventoryService) {}
     
     @UseGuards(JwtAuthGuard)
+    @ApiOperation({ summary: 'Create a new stock',  })
     @Version('1')
     @Post('create')
     async create(@Body() createInventoryDto: CreateInventoryDto, @Req() request: Request, @Res() response){

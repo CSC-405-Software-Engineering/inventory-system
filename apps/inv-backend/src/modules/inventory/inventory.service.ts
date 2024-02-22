@@ -55,8 +55,7 @@ export class InventoryService {
       where: { id },
     };
 
-    const inventory = await this.inventoryRepository.findOne(options);
-    return inventory;
+    return await this.inventoryRepository.findOne(options);
   }
 
   async remove(id: string): Promise<Inventory> {
