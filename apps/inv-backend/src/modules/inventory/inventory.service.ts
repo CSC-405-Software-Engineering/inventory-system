@@ -46,7 +46,7 @@ export class InventoryService {
     return await this.inventoryRepository.save(existingInventory);
   }
 
-  async findAll(): Promise<Inventory[]> {
+  async findAll() {
     return await this.inventoryRepository.find();
   }
 
