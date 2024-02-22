@@ -1,4 +1,4 @@
-import Demo from "@/components/Demo";
+// import Demo from "@/components/Demo";
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,7 @@ const HomePage = () => {
   }, [])
   return (
     <>
-      <Demo />
+      {/* <Demo /> */}
     </>
   );
 };
