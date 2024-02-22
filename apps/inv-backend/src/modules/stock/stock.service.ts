@@ -4,49 +4,54 @@ import { Repository } from 'typeorm';
 import { Stock } from './entities/stock.entity'; // Import your Stock entity
 import { CreateStockDto } from './dto/createStock.dto'; // Import your DTO
 import { UpdateStockDto } from './dto/updateStock.dto';
-import { EventEmitter2 } from '@nestjs/event-emitter'; // Import EventEmitter2 for event handling
+import { NotificationService } from '../notification/notification.service';
+import { InventoryService } from '../inventory/inventory.service';
+// import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'; // Import EventEmitter2 for event handling
 
 const LOW_STOCK_THRESHOLD = 10;
 @Injectable()
 export class StockService {
   constructor(
     @InjectRepository(Stock)
-    private readonly inventoryRepository: Repository<Stock>,
-    private readonly eventEmitter: EventEmitter2, 
+    private readonly stockRepository: Repository<Stock>,
+    // private eventEmitter: EventEmitter2, 
+    private readonly notificationService: NotificationService,
+    private readonly inventoryService: InventoryService,
   ) {}
 
   async create(createStockDto: CreateStockDto): Promise<Stock> {
-    
-      const existingInventory = await this.inventoryRepository.findOne({
-        where: { id: createStockDto.inventoryId },
+  
+
+      const existingStock = await this.stockRepository.findOne({
+        where: { name: createStockDto.name },
       });
 
-      if (existingInventory) {
+      if (existingStock) {
         throw new Error('Inventory already exists for the provided product ID');
       }
 
-      const newInventory = this.inventoryRepository.create(createStockDto);
+      const newStock = this.stockRepository.create({
+        ...createStockDto,
+        inventory: await this.inventoryService.findOne(createStockDto.inventoryId),
+        
+      });
 
-      const savedInventory = await this.inventoryRepository.save(newInventory);
+      return await this.stockRepository.save(newStock);
 
       // Check if the new inventory has a low stock level
-      if (savedInventory.quantity < LOW_STOCK_THRESHOLD) {
-        this.eventEmitter.emit('stock.low', savedInventory); // Emit 'stock.low' event
-      }
-      return savedInventory;
-    }
+      // if (savedInventory.quantity < LOW_STOCK_THRESHOLD) {
+      //   this.eventEmitter.emit('stock.low', savedInventory); // Emit 'stock.low' event
+      // }
   
-
-
+    }
 
     async findAll(): Promise<Stock[]> {
-      return this.inventoryRepository.find();
-    
+      return this.stockRepository.find();
     }
   
 
     async findOne(id: string): Promise<Stock> {
-      const stock = await this.inventoryRepository.findOne({where: {id}});
+      const stock = await this.stockRepository.findOne({where: {id}});
       if (!stock) {
         throw new NotFoundException(`Stock with ID "${id}" not found`);
       }
@@ -54,35 +59,38 @@ export class StockService {
     }
 
     async update(id: string, updateStockDto: UpdateStockDto): Promise<Stock> {
-        const existingInventory = await this.inventoryRepository.findOne({where: { id } });
+        const existingStock = await this.stockRepository.findOne({where: { id } });
     
-        if (!existingInventory) {
+        if (!existingStock) {
           throw new NotFoundException('Stock not found');
         }
     
         // Update properties of existing inventory with the ones provided in updateStockDto
-        this.inventoryRepository.merge(existingInventory, updateStockDto);
+        this.stockRepository.merge(existingStock, updateStockDto);
     
-        const updatedInventory = await this.inventoryRepository.save(existingInventory);
+        const updatedStock = await this.stockRepository.save(existingStock);
 
         // Check if the updated inventory has a low stock level
-        if (updatedInventory.quantity < LOW_STOCK_THRESHOLD) {
-          this.eventEmitter.emit('stock.low', updatedInventory); // Emit 'stock.low' event
+        if (updatedStock.quantity < LOW_STOCK_THRESHOLD) {
+          // this.eventEmitter.emit('stock.low', updatedInventory); // Emit 'stock.low' event
+
+          // Send email notification
+          // this.notificationService.minimumStockEmail({email: '', stock: updatedStock, quantity: updatedStock.quantity}); 
         }
     
-        return updatedInventory;
+        return updatedStock;
       }
     
     
     
     async remove(id: string) {
-        const stockToDelete = await this.inventoryRepository.findOne({where: { id } });
+        const stockToDelete = await this.stockRepository.findOne({where: { id } });
     
         if (!stockToDelete) {
           throw new NotFoundException('Stock not found');
         }
     
-        await this.inventoryRepository.remove(stockToDelete);
+        await this.stockRepository.remove(stockToDelete);
     }
     
 }

@@ -420,6 +420,34 @@ const UserDashboard = () => {
                     </div>
                   </div>
                 </div>
+        
+         <div className="grid grid-cols-4 gap-4">
+    <div className="bg-yellow p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
+      <h3 className="text-lg font-medium mb-2">Number of items</h3>
+      <p className="text-2xl font-bold">604 items</p>
+      </div>
+  </div>
+
+  <div className="grid grid-cols-4 gap-4">
+    <div className="bg-yellow p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
+       <h3 className="text-lg font-medium mb-2">Sales Performance</h3>
+       <p className="text-2xl font-bold">$3050</p>
+    </div>
+  </div>        
+  
+  <div className="grid grid-cols-4 gap-4">
+    <div className="bg-white p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
+      <h3 className="text-lg font-medium mb-2">Expiry Status</h3>
+      <p className="text-2xl font-bold">40 items</p>
+    </div>
+  </div>
+
+  <div className="grid grid-cols-4 gap-4">
+    <div className="bg-white p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
+      <h3 className="text-lg font-medium mb-2">Inventory Turnover Ratio</h3>
+      <p className="text-2xl font-bold">4.7</p>
+    </div>
+  </div>    
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-4">
           {/* AreA chart */}
@@ -627,10 +655,6 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-      </div>
-        
-                
-            
     </DashboardLayout>
     //   </ConditionalRoute>
     // </ConditionalRoute>

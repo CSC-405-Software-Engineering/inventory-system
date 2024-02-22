@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { MailerService } from '@nestjs-modules/mailer';
 import * as fs from 'fs';
 import * as ejs from 'ejs';
+import { MailerService } from '@nestjs-modules/mailer';
 
 interface Email {
     to: string;

@@ -1,41 +1,40 @@
-import { IsNotEmpty, IsString, IsNumber, IsUrl, IsDate, IsOptional, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsUUID, IsDateString } from 'class-validator';
+import { DeepPartial } from 'typeorm';
 
 export class CreateStockDto {
-  @IsNotEmpty()
+
+  @IsNotEmpty({message: 'Name is required'})
   @IsString()
   readonly name: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'Inventory ID is required'})
   @IsUUID()
   readonly inventoryId: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'imageURL is required'})
   @IsString()
   readonly imageURL: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'minStock is required'})
   @IsNumber()
   readonly minStock: number;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'maxStock is required'})
   @IsNumber()
   readonly maxStock: number;
 
-  @IsOptional()
+  @IsNotEmpty({message: 'quantity is required'})
   @IsNumber()
   readonly quantity?: number;
 
-  @IsNotEmpty()
+  @IsNotEmpty({message: 'unitPrice is required'})
   @IsNumber()
   readonly unitPrice: number;
 
-  @IsDate()
-  readonly lastPurchaseDate: Date;
-
-  @IsDate()
-  readonly expirationDate: Date;
-
-  @IsNotEmpty()
+  // @IsNotEmpty()
   @IsString()
   readonly location: string;
+
+  @IsDateString()
+  expirationDate: DeepPartial<Date>;
 }
