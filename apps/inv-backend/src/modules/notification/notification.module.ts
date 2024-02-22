@@ -15,8 +15,8 @@ require('dotenv').config();
         port: 465,
         secure: true,
         auth: {
-          user: 'zionchrist8@gmail.com',
-          pass: 'hnvs dqdg mzga fwbm',
+          user: process.env.MAIL_EMAIL,
+          pass: process.env.MAIL_PASSWORD,
         },
         connectionTimeout: 10000,
         logger: true,
