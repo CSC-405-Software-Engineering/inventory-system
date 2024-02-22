@@ -75,6 +75,14 @@ export class StockService {
     
     
     
-    async remove() {
+    async remove(id: string) {
+        const stockToDelete = await this.inventoryRepository.findOne({where: { id } });
+    
+        if (!stockToDelete) {
+          throw new NotFoundException('Stock not found');
+        }
+    
+        await this.inventoryRepository.remove(stockToDelete);
     }
+    
 }

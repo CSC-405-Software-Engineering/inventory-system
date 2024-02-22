@@ -11,7 +11,7 @@ import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Auth, User]),
+    TypeOrmModule.forFeature([Auth]),
     UsersModule,
     JwtModule.register({
       global: true,
