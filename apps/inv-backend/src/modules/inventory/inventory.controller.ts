@@ -1,16 +1,25 @@
-import { Controller, Delete, Get, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { InventoryService } from './inventory.service';
+import { CreateInventoryDto } from './dto/createInventory.dto';
 
 @Controller('inventory')
 export class InventoryController {
-    InventoryService: any;
+    constructor(private readonly inventoryService: InventoryService) {}
+    
+    @Post()
+    async create(@Body() createInventoryDto: CreateInventoryDto) {
+      return await this.inventoryService.create(createInventoryDto);
+    }
+    
     @Get()
     async findAll() {
-      return await this.InventoryService.findAll();
+      return await this.inventoryService.findAll();
     }
+    
   
     @Delete(':id')
     async remove(@Param('id') id: string) {
-      return await this.InventoryService.remove(+id);
+      return await this.inventoryService.remove(id);
     } 
 }
 //
