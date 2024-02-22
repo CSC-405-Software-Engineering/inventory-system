@@ -4,7 +4,7 @@ import { setAuthToken } from "./authSlice";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "backend/",
+  baseUrl: "https://inventory-system-i0do.onrender.com/backend/",
   prepareHeaders: (headers, { getState }:any) => {
     const token = getState()?.auth?.token;
 
@@ -50,6 +50,15 @@ export const appApi = createApi({
       query: (studentId) => `calculate-gpa/${studentId}`,
     }),
     
+    
+    addStock: builder.mutation<any, LoginProps>({
+      query: (credentials) => ({
+        url: "/v1/stock/create",
+        method: "POST",
+        body: credentials,
+      }),
+      // invalidatesTags: ["User"]
+    }),
 
     login: builder.mutation<any, LoginProps>({
       query: (credentials) => ({
@@ -94,6 +103,7 @@ export const {
   useLoginMutation,
   useGetCoursesQuery,
   useLoadUserQuery,
+  useAddStockMutation,
   useGetCurrentSessionQuery,
   useGetScheduleByProgramAndLevelQuery,
   useGetStudentCoursesQuery,
