@@ -26,6 +26,16 @@ export interface RegistrationProps {
   password: string;
 }
 
+export interface AddProductProps {
+  name: string;
+  image: string;
+  category: string;
+  location: string;
+  quantity: number;
+  bestbefore: string;
+  price: number;
+}
+
 export interface AuthProps {
   email?: string;
   isVerified?: boolean;

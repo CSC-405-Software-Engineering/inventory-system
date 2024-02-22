@@ -329,7 +329,7 @@ const UserDashboard = () => {
         columnChart2.destroy();
       };
     }
-  }, [options, options2]); // Adding options and options2 as dependencies
+  }, [options, options2, options3]); // Adding options and options2 as dependencies
 
   return (
     <ConditionalRoute redirectTo="/login" condition={authSlice ? true : false}>

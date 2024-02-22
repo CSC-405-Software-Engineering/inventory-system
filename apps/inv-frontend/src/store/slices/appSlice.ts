@@ -54,6 +54,15 @@ export const appApi = createApi({
       query: (studentId) => `calculate-gpa/${studentId}`,
     }),
     
+    
+    addStock: builder.mutation<any, LoginProps>({
+      query: (credentials) => ({
+        url: "/v1/stock/create",
+        method: "POST",
+        body: credentials,
+      }),
+      // invalidatesTags: ["User"]
+    }),
 
     login: builder.mutation<any, LoginProps>({
       query: (credentials) => ({
@@ -118,6 +127,7 @@ export const {
   useGetCoursesQuery,
   useLoadUserQuery,
   useGetInventoryQuery,
+  useAddStockMutation,
   useGetCurrentSessionQuery,
   useGetScheduleByProgramAndLevelQuery,
   useGetStudentCoursesQuery,
