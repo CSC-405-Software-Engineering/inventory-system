@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import {
   Avatar,
@@ -12,12 +13,25 @@ import {
 import { UserStateProps } from "@/store/interfaces/user.interface";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import DashboardIcon from "@/assets/icons/DashboardIcon";
+import PantryIcon from "@/assets/icons/PantryIcon";
+import RegistrationIcon from "@/assets/icons/RegistrationIcon";
+import { useDispatch } from "react-redux";
+import { appApi } from "@/store/slices/appSlice";
+import { logoutUser } from "@/store/slices/authSlice";
+import { useCallback } from "react";
+import { Link } from "react-router-dom";
+
+
 // import { useGetCurrentSessionQuery } from "@/store/slices/appSlice";
 
 const AuthNavBar = () => {
   const authSlice = useSelector<RootState, UserStateProps>(
     (state) => state.auth.user
   );
+
+  const dispatch = useDispatch();
+
 
   // const {data: currentSessionData} = useGetCurrentSessionQuery();
 
@@ -35,6 +49,35 @@ const AuthNavBar = () => {
       });
     }
   }, []);
+
+  const menus = [
+    {
+      title: "Dashboard",
+      link: "dashboard",
+      icon: <DashboardIcon />,
+      isActive: true,
+    },
+    {
+      title: "Pantry",
+      link: "pantry",
+      icon: <PantryIcon />,
+      isActive: false,
+    },
+    {
+      title: "Registration",
+      link: "registration",
+      icon: <RegistrationIcon />,
+      isActive: false,
+    },
+
+  ];
+
+  const handleLogout = useCallback(() => {
+    dispatch(appApi.util.resetApiState());
+    dispatch(logoutUser());
+  }, []);
+  
+  
 
   return (
     <Navbar
@@ -69,19 +112,27 @@ const AuthNavBar = () => {
             </div>
           }
         >
-          <DropdownHeader>
+          <DropdownHeader >
             <span className="block text-sm">Bonnie Green</span>
             <span className="block truncate text-sm font-medium">
               name@flowbite.com
             </span>
           </DropdownHeader>
-          <DropdownItem>Dashboard</DropdownItem>
-          <DropdownItem>Settings</DropdownItem>
-          <DropdownItem>Earnings</DropdownItem>
-          <DropdownDivider />
-          <DropdownItem>Sign out</DropdownItem>
-        </Dropdown>
-        <NavbarToggle />
+ 
+  {menus.map(({ title, link }, index) => (
+    <DropdownItem className="w-full" key={index}>
+      <Link className="w-full" to={`/${link}`} key={index}>
+        <div className="flex w-full">
+      {title}
+      </div>
+      </Link>
+    </DropdownItem>
+  ))}
+  <DropdownDivider />
+  <DropdownItem  onClick={()=>{handleLogout}}>Sign out</DropdownItem>
+</Dropdown>
+
+      
       </div>
     </Navbar>
   );
