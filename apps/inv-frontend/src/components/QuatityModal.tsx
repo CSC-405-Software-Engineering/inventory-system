@@ -1,5 +1,4 @@
 import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
 import Picture from "@/assets/Picture1.png";
 
 interface QuatityModalProps {

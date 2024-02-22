@@ -8,7 +8,6 @@ import {
   DropdownItem,
   Navbar,
   NavbarBrand,
-  NavbarToggle,
 } from "flowbite-react";
 import { UserStateProps } from "@/store/interfaces/user.interface";
 import { useSelector } from "react-redux";
