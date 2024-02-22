@@ -5,6 +5,7 @@ import { Stock } from './entities/stock.entity'; // Import your Stock entity
 import { CreateStockDto } from './dto/createStock.dto'; // Import your DTO
 import { UpdateStockDto } from './dto/updateStock.dto';
 import { NotificationService } from '../notification/notification.service';
+import { InventoryService } from '../inventory/inventory.service';
 // import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'; // Import EventEmitter2 for event handling
 
 const LOW_STOCK_THRESHOLD = 10;
@@ -15,6 +16,7 @@ export class StockService {
     private readonly stockRepository: Repository<Stock>,
     // private eventEmitter: EventEmitter2, 
     private readonly notificationService: NotificationService,
+    private readonly inventoryService: InventoryService,
   ) {}
 
   async create(createStockDto: CreateStockDto): Promise<Stock> {
@@ -27,7 +29,19 @@ export class StockService {
         throw new Error('Inventory already exists for the provided product ID');
       }
 
-      const newStock = this.stockRepository.create(createStockDto);
+      const newStock = this.stockRepository.create({
+        name: createStockDto.name,
+        inventory: await this.inventoryService.findOne(createStockDto.inventoryId),
+        imageURL: "",
+        minStock: createStockDto.minStock,
+        maxStock: createStockDto.maxStock,
+        quantity: createStockDto.quantity,
+        unitPrice: createStockDto.unitPrice,
+        location: createStockDto.location,
+        expirationDate: createStockDto.expirationDate,
+      });
+
+      console.log('newStock', newStock);
 
       return await this.stockRepository.save(newStock);
 

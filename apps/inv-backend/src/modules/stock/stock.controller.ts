@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, NotFoundException, Res} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, NotFoundException, Res, Version} from '@nestjs/common';
 import { CreateStockDto } from './dto/createStock.dto';
 import { UpdateStockDto } from './dto/updateStock.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -10,6 +10,7 @@ import { StockService } from './stock.service';
 export class StockController {
   constructor(private readonly stockService: StockService) {}
 
+  @Version('1')
   @Post('create')
   @ApiOperation({ summary: 'Create a new stock' })
   @ApiResponse({ status: 201, description: 'Stock successfully created' })
