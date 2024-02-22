@@ -1,25 +1,26 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import EnrollCourseModal from "@/components/EditItemQuantityModal";
+
+import QuatityModal from "@/components/QuatityModal";
 import { useState } from "react";
 
 const Pantry = () => {
+  const [openQuatityModal, setOpenQuatityModal] = useState(false);
 
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleEditItemQuantity = () => {
-    setOpenModal(true);
+  const handleQuatityModal = () => {
+    setOpenQuatityModal(true);
   };
 
   return (
     <DashboardLayout>
       <>
       <div>Pantry</div>
-      <button onClick={handleEditItemQuantity}>click me</button>
-      <EnrollCourseModal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+
+      <button onClick={handleQuatityModal}>click me</button>
+      <QuatityModal
+        openModal={openQuatityModal}
+        setOpenModal={setOpenQuatityModal}
       />
-      </>
+
     </DashboardLayout>
   );
 };

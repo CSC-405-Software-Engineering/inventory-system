@@ -110,6 +110,16 @@ const App: React.FC<Props> = ({ assetMap }) => {
                     }
                   />
                   <Route
+                    path="/pantry"
+                    element={
+                      <Suspense fallback={<PageLoader />}>
+                        {React.createElement(
+                          lazy(() => import("@/pages/Pantry/Pantry"))
+                        )}
+                      </Suspense>
+                    }
+                  />
+                  <Route
                     path="/dashboard"
                     element={
                       <Suspense fallback={<PageLoader />}>
@@ -117,19 +127,6 @@ const App: React.FC<Props> = ({ assetMap }) => {
                           lazy(
                             () =>
                               import("@/pages/Users/UserDashboard")
-                          )
-                        )}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/pantry"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(
-                            () =>
-                              import("@/pages/Users/Pantry")
                           )
                         )}
                       </Suspense>

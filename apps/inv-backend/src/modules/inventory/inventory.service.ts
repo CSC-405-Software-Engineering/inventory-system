@@ -2,37 +2,72 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Inventory } from './entities/inventory.entity';
 import { FindOneOptions, Repository } from 'typeorm';
+import { CreateInventoryDto } from './dto/createInventory.dto';
+import { UpdateInventoryDto } from './dto/updateInventory.dto';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class InventoryService {
-    constructor(
-        @InjectRepository(Inventory)
-        private readonly inventoryRepository: Repository<Inventory>,
-    ) {}
+  constructor(
+    @InjectRepository(Inventory)
+    private readonly inventoryRepository: Repository<Inventory>,
+    private readonly usersService: UsersService,
+  ) {}
 
-    async create(inventory: Inventory): Promise<Inventory> {
-        const newInventory = this.inventoryRepository.create(inventory);
-        return await this.inventoryRepository.save(newInventory);
+  async create(createInventoryDto: CreateInventoryDto, userId: string): Promise<Inventory> {
+    const inventory = await this.inventoryRepository.findOne({
+      where: { name: createInventoryDto.name },
+    });
+    if (inventory) {
+      throw new NotFoundException(
+        `Inventory with name ${createInventoryDto.name} already exists`,
+      );
+    }
+    const newInventory = this.inventoryRepository.create({
+      ...createInventoryDto,
+      user: await this.usersService.findById(userId),
+    });
+    return await this.inventoryRepository.save(newInventory);
+  }
+
+  async update(
+    id: string,
+    updateInventoryDto: UpdateInventoryDto,
+  ): Promise<Inventory> {
+    const existingInventory = await this.inventoryRepository.findOne({
+      where: { id },
+    });
+
+    if (!existingInventory) {
+      throw new NotFoundException(`Inventory with ID ${id} not found`);
     }
 
-    async update(id: string, inventory:Inventory): Promise<Inventory> {
-        const existingInventory = await this.inventoryRepository.findOne({ where: { id } });
+    this.inventoryRepository.merge(existingInventory, updateInventoryDto);
+    return await this.inventoryRepository.save(existingInventory);
+  }
 
-        if (!existingInventory) {
-            throw new NotFoundException(`Inventory with ID ${id} not found`);
-        }
+  async findAll(): Promise<Inventory[]> {
+    return this.inventoryRepository.find();
+  }
 
-        this.inventoryRepository.merge(existingInventory, inventory);
-        return await this.inventoryRepository.save(existingInventory);
+  async findOne(id: string): Promise<Inventory | null> {
+    const options: FindOneOptions<Inventory> = {
+      where: { id },
+    };
+
+    const inventory = await this.inventoryRepository.findOne(options);
+    return inventory;
+  }
+
+  async remove(id: string): Promise<Inventory> {
+    const existingInventory = await this.inventoryRepository.findOne({
+      where: { id },
+    });
+
+    if (!existingInventory) {
+      throw new NotFoundException(`Inventory with ID ${id} not found`);
     }
 
-    async findOne(id: string): Promise<Inventory | null> {
-        const options: FindOneOptions<Inventory> = {
-          where: { id },
-        };
-    
-        const order = await this.inventoryRepository.findOne(options);
-        return order;
-      }
-    
+    return await this.inventoryRepository.remove(existingInventory);
+  }
 }
