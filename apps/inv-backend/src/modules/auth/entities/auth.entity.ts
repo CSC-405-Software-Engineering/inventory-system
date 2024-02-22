@@ -5,8 +5,8 @@ import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Auth {
-    @PrimaryGeneratedColumn()
-    authID: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({ unique: true, length: 50 })
     email: string;

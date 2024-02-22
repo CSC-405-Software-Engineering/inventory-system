@@ -9,6 +9,7 @@ import { LoginUserDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
+  
   constructor(
     private readonly usersService: UsersService,
     private jwtService: JwtService,
@@ -16,17 +17,6 @@ export class AuthService {
     @InjectRepository(Auth)
     private authRepository: Repository<Auth>,
   ) {}
-
-  async signIn(email: string, pass: string): Promise<{ access_token: string }> {
-    const userAuth = await this.findByEmail(email);
-    if (userAuth.password !== pass || !userAuth) {
-      throw new UnauthorizedException();
-    }
-    const payload = { username: userAuth.email };
-    return {
-      access_token: await this.jwtService.signAsync(payload),
-    };
-  }
 
   async findByEmail(email: string) {
     return await this.authRepository.findOne({ where: { email } });
@@ -52,8 +42,6 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-
-
     const isValidPassword = await this.passwordService.comparePassword(
       password,
       user.password,
@@ -66,5 +54,9 @@ export class AuthService {
     // Omit sensitive fields like password from the returned user object
     const { password: _, ...userInfo } = user;
     return userInfo;
+  }
+
+  findOne(id: string) {
+    return this.authRepository.findOne({ where: { id }});
   }
 }
