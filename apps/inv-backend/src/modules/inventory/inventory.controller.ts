@@ -7,7 +7,7 @@ export class InventoryController {
     constructor(private readonly inventoryService: InventoryService) {}
     
     @Version('1')
-    @Post()
+    @Post('create')
     async create(@Body() createInventoryDto: CreateInventoryDto) {
       return await this.inventoryService.create(createInventoryDto);
     }
