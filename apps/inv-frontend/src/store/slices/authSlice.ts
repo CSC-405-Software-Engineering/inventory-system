@@ -16,6 +16,7 @@ export const loadUser = createAsyncThunk<any, void>(
   "load-user",
   async () => {
     const token = localStorage.getItem("token");
+    console.log('The token', token);
 
     try {
       const { data }: any = await axios.get<any>(
