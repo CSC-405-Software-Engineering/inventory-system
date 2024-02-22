@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   LoginProps,
   Role,
@@ -43,7 +44,6 @@ const Login = () => {
     },
     [dispatch, login]
   );
-
   return (
     <ConditionalRoute
       redirectTo="/dashboard"
