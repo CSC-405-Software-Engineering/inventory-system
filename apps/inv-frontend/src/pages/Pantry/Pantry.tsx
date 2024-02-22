@@ -1,6 +1,7 @@
 import DryPantryIcon from "@/assets/icons/DryPantryTabIcon";
 import FreezerTabIcon from "@/assets/icons/FreezerTagIcon";
 import FrigdeTabIcon from "@/assets/icons/FridgeTabIcon";
+import AddListsModal from "@/components/AddListsModal";
 import AddNew from "@/components/AddNew";
 import AddNewItemBtn from "@/components/AddNewBtn";
 import AuthNavBar from "@/components/AuthNavBar";
@@ -67,6 +68,13 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
   const handleTabClick = (index: number) => {
     setActiveTab(index);
   };
+
+  const [openAddItemModal, setOpenAddItemModal] = useState(false);
+
+  const handleAddItem = () => {
+    setOpenAddItemModal(true);
+  };
+
 
   return (
     <DashboardLayout>
@@ -136,7 +144,9 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
                                     </svg>
                                 </button> */}
             </div>
-            <AddNewItemBtn />
+            <button className="bg-[#9D0208] flex w-52 text-white text-[16px] font-[700] py-2 px-4 rounded-[5px] justify-center" onClick={handleAddItem}>
+      Add a new Item
+    </button>
           </div>
         </div>
         <div className="flex flex-col">
@@ -204,6 +214,7 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
           </div>
         </div>
       </div>
+      <AddListsModal openModal={openAddItemModal} setOpenModal={setOpenAddItemModal}/>
     </DashboardLayout>
   );
 };
