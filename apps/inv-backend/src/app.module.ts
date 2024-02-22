@@ -18,7 +18,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     UsersModule,
     InventoryModule,
     StockModule,
-    NotificationModule,EventEmitterModule.forRoot()],
+    NotificationModule,
+    
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
