@@ -1,11 +1,11 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import { Role, UserStateProps } from "@/store/interfaces/user.interface";
+// import { UserStateProps } from "@/store/interfaces/user.interface";
 import {
   // useGetCGPAQuery,
   useLoadUserQuery,
 } from "@/store/slices/appSlice";
-import { RootState } from "@/store/store";
-import { useSelector } from "react-redux";
+// import { RootState } from "@/store/store";
+// import { useSelector } from "react-redux";
 import ApexCharts from "apexcharts";
 import { useEffect, useRef, useState } from "react";
 import { Dropdown, DropdownItem } from "flowbite-react";
@@ -17,9 +17,9 @@ const UserDashboard = () => {
     // error: loadUserError,
   } = useLoadUserQuery();
 
-  const authSlice = useSelector<RootState, UserStateProps>(
-    (state) => state.auth.user
-  );
+  // const authSlice = useSelector<RootState, UserStateProps>(
+  //   (state) => state.auth.user
+  // );
 
   const [selectedOption, setSelectedOption] = useState("Today");
 
