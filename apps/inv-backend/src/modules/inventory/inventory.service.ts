@@ -47,7 +47,7 @@ export class InventoryService {
   }
 
   async findAll(): Promise<Inventory[]> {
-    return this.inventoryRepository.find();
+    return await this.inventoryRepository.find();
   }
 
   async findOne(id: string): Promise<Inventory | null> {
