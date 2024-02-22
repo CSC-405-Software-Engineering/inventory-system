@@ -330,7 +330,7 @@ const UserDashboard = () => {
     //     condition={authSlice?.auth?.role === Role.User ? true : false}
     //   >
     <DashboardLayout>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         {/* Your existing elements */}
         <div className="w-full">
           <div className="flex items-center w-full">
@@ -342,8 +342,8 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col w-full gap-6 my-4">
-        <div className="flex flex-col gap-4 w-full bg-gray-100 px-6 py-8  rounded-lg">
+        <div className="flex md:flex-row flex-col w-full gap-6">
+        <div className="flex flex-col gap-4 w-full bg-[#FBFBFB] px-6 py-8  rounded-lg">
                     <div className="flex items-center justify-between w-full">
                       <p className="text-black text-[0.875rem] font-semibold">Low Stock</p>
                       <p className="text-[0.75rem] font-semibold text-[#939393]">
@@ -381,7 +381,7 @@ const UserDashboard = () => {
                         </div>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-4 w-full bg-gray-100 px-6 py-8 rounded-lg">
+                  <div className="flex flex-col gap-4 w-full bg-[#FBFBFB] px-6 py-8 rounded-lg">
                     <div className="flex items-center justify-between w-full">
                       <p className="text-black text-[0.875rem] font-semibold">Low Stock</p>
                       <p className="text-[0.75rem] font-semibold text-[#939393]">
@@ -421,33 +421,66 @@ const UserDashboard = () => {
                   </div>
                 </div>
         
-         <div className="grid grid-cols-4 gap-4">
-    <div className="bg-yellow p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
-      <h3 className="text-lg font-medium mb-2">Number of items</h3>
-      <p className="text-2xl font-bold">604 items</p>
+         <div className="grid md:grid-cols-3 grid-cols-2 lg:grid-cols-4 gap-6 font-semibold">
+         <div className="bg-[#FBFBFB] p-4 shadow-md flex flex-col gap-4 rounded-lg overflow-hidden">
+  <p className="text-sm">Number of items</p>
+  <div className="flex justify-between relative">
+    <div className="flex flex-col">
+      <p className="text-[2rem]">604 items</p>
+      <p className="text-[0.75rem] text-[#939393]">approx. 1.5kg</p>
+    </div>
+    <img
+      src="/assets/images/bread.png"
+      className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 -rotate-12 z-10"
+      style={{ width: "100px", height: "100px" }}
+    />
+  </div>
+</div>
+
+      <div className="bg-[#FBFBFB] p-4 shadow-md flex flex-col gap-4 rounded-lg  overflow-hidden">
+       <p className="text-sm">Sales Performance</p>
+       <div className="flex justify-between relative">
+      <div className="flex flex-col">
+       <p className="text-[2rem] ">$3050</p>
+      <p className="text-[0.75rem] text-[#939393]">500 items</p>
+       </div>
+       <img
+      src="/assets/images/coin.png"
+      className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4  z-10"
+      style={{ width: "100px", height: "100px" }}
+    />
+  </div>
+    </div>
+    <div className="bg-[#FBFBFB] p-4 shadow-md flex flex-col gap-4 rounded-lg  overflow-hidden">
+      <p className="text-sm">Expiry Status</p>
+      <div className="flex justify-between relative">
+      <div className="flex flex-col">
+      <p className="text-[2rem] ">40 items</p>
+      <p className="text-[0.75rem] text-[#939393]">within the next 3 months</p>
       </div>
+      <img
+      src="/assets/images/caution.png"
+      className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4  z-10"
+      style={{ width: "100px", height: "100px" }}
+    />
   </div>
-
-  <div className="grid grid-cols-4 gap-4">
-    <div className="bg-yellow p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
-       <h3 className="text-lg font-medium mb-2">Sales Performance</h3>
-       <p className="text-2xl font-bold">$3050</p>
     </div>
-  </div>        
-  
-  <div className="grid grid-cols-4 gap-4">
-    <div className="bg-white p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
-      <h3 className="text-lg font-medium mb-2">Expiry Status</h3>
-      <p className="text-2xl font-bold">40 items</p>
+    <div className="bg-[#FBFBFB] p-4 shadow-md flex flex-col gap-4 rounded-lg  overflow-hidden">
+      <p className="text-sm">Inventory Turnover Ratio</p>
+      <div className="flex justify-between relative">
+      <div className="flex flex-col">
+      <p className="text-[2rem] ">4.7</p>
+      <p className="text-[0.75rem] text-[#939393]">Last Month: 4.2</p>
+    </div>
+    <img
+      src="/assets/images/trend.png"
+      className="absolute bottom-0 right-0 transform translate-x-4 translate-y-6 rotate-12  z-10"
+      style={{ width: "90px", height: "70px" }}
+    />
+  </div>
     </div>
   </div>
-
-  <div className="grid grid-cols-4 gap-4">
-    <div className="bg-white p-4 rounded-lg shadow-md" v-for="i in 4" key="i">
-      <h3 className="text-lg font-medium mb-2">Inventory Turnover Ratio</h3>
-      <p className="text-2xl font-bold">4.7</p>
-    </div>
-  </div>    
+     
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-4">
           {/* AreA chart */}
@@ -654,6 +687,8 @@ const UserDashboard = () => {
               </div>
             </div>
           </div>
+        </div>
+
         </div>
     </DashboardLayout>
     //   </ConditionalRoute>

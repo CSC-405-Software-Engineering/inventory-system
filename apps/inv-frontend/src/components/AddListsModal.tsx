@@ -21,7 +21,7 @@ const AddListsModal = ({ openModal, setOpenModal }: AddListsModalProps) => {
         show={openModal}
         onClose={() => setOpenModal(false)}
       >
-        <Modal.Header className="border-0 text-[#1C274C] text-2xl font-semibold flex justify-center items-center w-full">
+        <Modal.Header className="text-[#1C274C] text-[1.7rem] font-semibold flex justify-center items-center w-full">
           Add Items{" "}
         </Modal.Header>
         <Modal.Body className="py-0 overflow-y-visible">
