@@ -4,7 +4,7 @@ import { setAuthToken } from "./authSlice";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "backend/",
+  baseUrl: "https://inventory-system-i0do.onrender.com/backend/",
   prepareHeaders: (headers, { getState }:any) => {
     const token = getState()?.auth?.token;
 
@@ -35,6 +35,10 @@ export const appApi = createApi({
 
     getCourse: builder.query<any, string>({
       query: (courseId:string) => `v1/courses/${courseId}`,
+    }),
+
+    getInventory: builder.query<any, void>({
+      query: () => "v1/inventory",
     }),
 
     loadUser: builder.query<any, void>({
@@ -95,6 +99,7 @@ export const {
   useLoginMutation,
   useGetCoursesQuery,
   useLoadUserQuery,
+  useGetInventoryQuery,
   useGetCurrentSessionQuery,
   useGetScheduleByProgramAndLevelQuery,
   useGetStudentCoursesQuery,
