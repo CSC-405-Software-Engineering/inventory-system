@@ -24,4 +24,14 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
+
+  async update(id: string, firstName: string, lastName: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new ConflictException(`User with ID ${id} not found`);
+    }
+    user.firstName = firstName;
+    user.lastName = lastName;
+    return await this.userRepository.save(user);
+  }
 }
