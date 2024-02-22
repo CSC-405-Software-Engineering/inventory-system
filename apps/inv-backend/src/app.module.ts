@@ -1,19 +1,21 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
 import { typeOrmConfig } from './typeorm.config';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { InventoryModule } from './modules/inventory/inventory.module';
+import { StockModule } from './modules/stock/stock.module';
 
 
 @Module({
-  imports: [ServeStaticModule.forRoot({
-    rootPath: join(__dirname, '../..', 'inv-frontend','dist'),
-    }),
+  imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    UsersModule,],
+    AuthModule,
+    UsersModule,
+    InventoryModule,
+    StockModule,],
   controllers: [AppController],
   providers: [AppService],
 })
