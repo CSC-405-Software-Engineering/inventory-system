@@ -40,7 +40,6 @@ export class UsersService {
   }
 
   async findOneByAuthId(authId: string): Promise<User | undefined> {
-    console.log('Na here')
     return await this.userRepository.findOne({
       where: { auth: { id: authId } },
       relations: ['auth'],

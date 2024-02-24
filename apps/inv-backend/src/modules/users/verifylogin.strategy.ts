@@ -23,7 +23,6 @@ export class VerifyLogin implements CanActivate {
 
     try {
       const  {sub: id}: any = verify(access_token, process.env.JWT_SECRET);
-      console.log("id:",id);
       if (!id) return false;
 
       const user = await this.usersService.findById(id);

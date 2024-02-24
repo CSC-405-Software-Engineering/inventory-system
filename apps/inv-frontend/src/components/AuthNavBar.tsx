@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import {
   Avatar,
@@ -22,8 +21,6 @@ import { useCallback } from "react";
 import { Link } from "react-router-dom";
 
 
-// import { useGetCurrentSessionQuery } from "@/store/slices/appSlice";
-
 const AuthNavBar = () => {
   const authSlice = useSelector<RootState, UserStateProps>(
     (state) => state.auth.user
@@ -31,8 +28,6 @@ const AuthNavBar = () => {
 
   const dispatch = useDispatch();
 
-
-  // const {data: currentSessionData} = useGetCurrentSessionQuery();
 
   useEffect(() => {
     const menuButton: any = document.getElementById("menu-button");
@@ -68,15 +63,12 @@ const AuthNavBar = () => {
       icon: <RegistrationIcon />,
       isActive: false,
     },
-
   ];
 
   const handleLogout = useCallback(() => {
     dispatch(appApi.util.resetApiState());
     dispatch(logoutUser());
   }, []);
-  
-  
 
   return (
     <Navbar
@@ -89,7 +81,7 @@ const AuthNavBar = () => {
           Pantry<span className="text-custom-primary-1">Hub</span>
         </p>
       </NavbarBrand>
-      <div className="flex md:pr-8 md:order-2 gap-1 md:gap-3">
+      <div className="hidden lg:flex md:pr-8 md:order-2 gap-1 md:gap-3">
         <img src="/assets/icons/notifications-icon.svg" alt="Notification" />
 
         <Dropdown
@@ -101,37 +93,84 @@ const AuthNavBar = () => {
                 <p className="text-xs font-bold text-custom-primary-1">{`${
                   authSlice?.firstName || "Adeola"
                 } ${authSlice?.lastName || "Adams"}`}</p>
-                <p className="text-[0.625rem] font-medium">Cafeteria Manager</p>
+                <p className="text-[0.625rem] font-medium">Inventory Manager</p>
               </div>
               <Avatar
                 alt="User settings"
-                img="/assets/images/auth-profile-image.png"
+                img="/assets/images/profile.png"
                 rounded
               />
             </div>
           }
         >
-          <DropdownHeader >
-            <span className="block text-sm">Bonnie Green</span>
+          <DropdownHeader>
+            <p className="text-xs font-bold text-custom-primary-1">{`${
+              authSlice?.firstName || "Adeola"
+            } ${authSlice?.lastName || "Adams"}`}</p>
             <span className="block truncate text-sm font-medium">
-              name@flowbite.com
+              Inventory Manager
             </span>
           </DropdownHeader>
- 
-  {menus.map(({ title, link }, index) => (
-    <DropdownItem className="w-full" key={index}>
-      <Link className="w-full" to={`/${link}`} key={index}>
-        <div className="flex w-full">
-      {title}
-      </div>
-      </Link>
-    </DropdownItem>
-  ))}
-  <DropdownDivider />
-  <DropdownItem  onClick={handleLogout}>Sign out</DropdownItem>
-</Dropdown>
 
-      
+          {menus.map(({ title, link }, index) => (
+            <DropdownItem className="w-full" key={index}>
+              <Link className="w-full" to={`/${link}`} key={index}>
+                <div className="flex w-full">{title}</div>
+              </Link>
+            </DropdownItem>
+          ))}
+          <DropdownDivider />
+          <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
+        </Dropdown>
+      </div>
+      <div className="flex lg:hidden md:pr-8 md:order-2 gap-1 md:gap-3">
+        <Dropdown
+          arrowIcon={false}
+          inline
+          label={
+            <div className="flex gap-2 items-center md:gap-3">
+              <Avatar
+                alt="User settings"
+                img="/assets/images/profile.png"
+                rounded
+              />
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </div>
+          }
+        >
+          <DropdownHeader>
+            <p className="text-sm font-bold text-custom-primary-1">{`${
+              authSlice?.firstName || "Adeola"
+            } ${authSlice?.lastName || "Adams"}`}</p>
+            <span className="block truncate text-xs font-medium">
+              Inventory Manager
+            </span>
+          </DropdownHeader>
+
+          {menus.map(({ title, link }, index) => (
+            <DropdownItem className="w-full" key={index}>
+              <Link className="w-full" to={`/${link}`} key={index}>
+                <div className="flex w-full">{title}</div>
+              </Link>
+            </DropdownItem>
+          ))}
+          <DropdownDivider />
+          <DropdownItem onClick={handleLogout}>Sign out</DropdownItem>
+        </Dropdown>
       </div>
     </Navbar>
   );

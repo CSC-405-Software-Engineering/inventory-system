@@ -51,7 +51,6 @@ export class InventoryController {
     @Version('1')
     @Get(':id')
     async findOne(@Param('id') id: string, @Res() response){
-      console.log('ID', id);
       // return await this.inventoryService.findOne(id);
       try {
         const data = await this.inventoryService.findOne(id);
