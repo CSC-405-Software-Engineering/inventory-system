@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import AddNew from "./AddNew";
 import InventoryItem from "./InventoryItem";
 import AddListsModal from "./AddListsModal";
-import EditListsModal from "./EditListsModal";
 
 export interface InventoryItemProps {
   itemId: string;
@@ -121,19 +120,7 @@ const InventoryCategory: React.FC<InventoryCategoryProps> = ({
           </button>
         </div>
       </div>
-      {/* <div className="flex flex-row w-full justify-between">
-                <AddNew onClick={handleAddItem} />
-                {InventoryItems.map((item) => (
-                    <InventoryItem
-                        key={item.id}  // Added a key to each InventoryItem for React rendering optimization
-                        items={[{
-                            itemName: item.name,
-                            itemAmount: item.amount,
-                            itemImage: item.image,
-                        }]}
-                    />
-                ))}
-            </div> */}
+     
       <div className="flex flex-row w-full gap-4">
         <AddNew inventoryName={catName} onClick={handleAddItem} />
         <div
@@ -157,9 +144,7 @@ const InventoryCategory: React.FC<InventoryCategoryProps> = ({
             ))}
         </div>
 
-        {/* <div className="my-3"> */}
         <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"/>
-        {/* </div> */}
       </div>
       <AddListsModal
         openModal={openAddItemModal}

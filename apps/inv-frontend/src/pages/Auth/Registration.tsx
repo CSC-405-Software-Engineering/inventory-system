@@ -26,7 +26,6 @@ const Registration = () => {
   const [
     registration,
     {
-      data: registrationData,
       error: registrationError,
       isError: registrationIsError,
       isSuccess: registrationIsSuccess,

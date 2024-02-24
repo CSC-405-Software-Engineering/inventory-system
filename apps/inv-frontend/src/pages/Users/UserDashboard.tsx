@@ -1,7 +1,5 @@
 import DashboardLayout from "@/components/DashboardLayout";
 import { useGetInventoryQuery } from "@/store/slices/appSlice";
-// import { RootState } from "@/store/store";
-// import { useSelector } from "react-redux";
 import ApexCharts from "apexcharts";
 import { useEffect, useRef, useState } from "react";
 import { Dropdown, DropdownItem } from "flowbite-react";

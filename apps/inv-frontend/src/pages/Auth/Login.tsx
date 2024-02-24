@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   LoginProps,
   Role,
@@ -22,7 +21,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const dispatch = useDispatch<any>();
-  // const { data: loadUserData } = useLoadUserQuery();
   const authSlice = useSelector<RootState, UserStateProps>(
     (state) => state.auth.user
   );

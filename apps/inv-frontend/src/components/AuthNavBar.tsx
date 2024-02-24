@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import {
   Avatar,
@@ -21,7 +20,6 @@ import { logoutUser } from "@/store/slices/authSlice";
 import { useCallback } from "react";
 import { Link } from "react-router-dom";
 
-// import { useGetCurrentSessionQuery } from "@/store/slices/appSlice";
 
 const AuthNavBar = () => {
   const authSlice = useSelector<RootState, UserStateProps>(
@@ -30,7 +28,6 @@ const AuthNavBar = () => {
 
   const dispatch = useDispatch();
 
-  // const {data: currentSessionData} = useGetCurrentSessionQuery();
 
   useEffect(() => {
     const menuButton: any = document.getElementById("menu-button");

@@ -1,11 +1,9 @@
 import AddListsModal from "@/components/AddListsModal";
-// import AddNew from "@/components/AddNew";
 import DashboardLayout from "@/components/DashboardLayout";
 import InventoryCategory from "@/components/InventoryCategory";
 import ConditionalRoute from "@/routes/ConditionalRoute";
 import { Role, UserStateProps } from "@/store/interfaces/user.interface";
 import { useGetInventoryQuery } from "@/store/slices/appSlice";
-// import InventoryItem from "@/components/InventoryItem";
 import { ReactElement, useState } from "react";
 import { RootState } from "@/store/store";
 import { useSelector } from "react-redux";
@@ -47,7 +45,6 @@ const PantryTab: React.FC<TabsWithIconsProps> = ({
 
   const groupedInventoryItems = InventoryItems?.data?.reduce(
     (acc: any, inventoryItem: any) => {
-      // Check if the inventory item name already exists in the accumulator
       if (!acc[inventoryItem.name]) {
         // If not, initialize it with an empty array
         acc[inventoryItem.name] = [];
@@ -189,7 +186,7 @@ const Pantry = () => {
     (state) => state.auth.user
   );
 
-  const { data: InventoryItems, isLoading: InventoryItemsIsLoading }: any =
+  const { data: InventoryItems }: any =
     useGetInventoryQuery();
 
   const locations = Array.from(

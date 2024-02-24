@@ -38,10 +38,6 @@ export const appApi = createApi({
       query: () => "v1/users/user",
     }),
 
-    getPost: builder.query({
-      query: (postId) => `/posts/${postId}`,
-    }),
-
     getAStock: builder.query({
       query: (stockId) => `v1/stock/${stockId}`,
       providesTags: ["AStock"],

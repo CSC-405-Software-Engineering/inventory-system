@@ -1,7 +1,7 @@
 import { EditProductSchema } from "@/utils/Yup";
 import { Modal, Alert } from "flowbite-react";
 import { Form, Formik } from "formik";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { AddProductProps } from "@/store/interfaces/user.interface";
 import {
   useEditStockMutation,
@@ -37,7 +37,7 @@ const EditListsModal = ({
   const { data: stockItems, isLoading: getAStockIsLaoding }: any =
     useGetAStockQuery(stockId);
 
-  const [editStock, { error: editStockError, isError: editStockIsError }] =
+  const [editStock, { error: editStockError, isError: editStockIsError }]:any =
     useEditStockMutation();
 
   const scrollToTarget = () => {
@@ -46,10 +46,6 @@ const EditListsModal = ({
       targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  // useEffect(()=>{
-  //   setOpenParentModal(false);
-  // }, [])
 
   const handleEditProduct = useCallback(
     async (props: AddProductProps) => {

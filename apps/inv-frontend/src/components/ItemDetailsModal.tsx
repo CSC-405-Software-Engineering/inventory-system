@@ -1,7 +1,6 @@
 import { Modal, Alert } from "flowbite-react";
 import { useCallback, useState } from "react";
 import {
-  useGetAStockQuery,
   useGetStockQuery,
   useRemoveStockMutation,
 } from "@/store/slices/appSlice";
@@ -33,19 +32,15 @@ const ItemDetailsModal = ({
     removeStock,
     {
       error: removeStockError,
-      isLoading: removeStockIsLoading,
       isError: removeStockIsError,
     },
   ]: any = useRemoveStockMutation();
 
-  const { data: stockItems, isLoading: getStockIsLaoding }: any =
+  const { data: stockItems }: any =
     useGetStockQuery();
 
     const desiredStock = stockItems?.data?.find((stock:any) => stock.id === stockId);
 
-
-  const { data: stockItem, isLoading: getAStockIsLaoding }: any =
-    useGetAStockQuery(stockId);
 
   const handleEditProduct = () => {
     setOpenEditItemModal(true);
@@ -181,7 +176,6 @@ const ItemDetailsModal = ({
                       ? "border-white"
                       : "border-custom-primary-1"
                   }  font-semibold rounded-[0.5125rem]  text-custom-primary-1 w-60 h-[2.5rem] px-4 justify-center items-center self-end hover:bg-white hover:border  border-3 hover:border-custom-primary-1 hover:text-custom-primary-1`}
-                  // onClick={() => handleAddProduct(values)}
                   disabled={isRemoveStockLoading}
                   onClick={handleRemoveProduct}
                 >

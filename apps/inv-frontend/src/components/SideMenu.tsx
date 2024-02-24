@@ -2,7 +2,6 @@ import DashboardIcon from "@/assets/icons/DashboardIcon";
 import LogoutIcon from "@/assets/icons/LogoutIcon";
 import PantryIcon from "@/assets/icons/PantryIcon";
 import RegistrationIcon from "@/assets/icons/RegistrationIcon";
-import SettingsIcon from "@/assets/icons/SettingsIcon";
 import { appApi } from "@/store/slices/appSlice";
 import { logoutUser } from "@/store/slices/authSlice";
 import { updateMenu } from "@/store/slices/menuSlice";
@@ -84,16 +83,7 @@ const SideMenu = () => {
           ))}
         </div>
         <div className="flex flex-col gap-4">
-          {/* <Link to={`/settings`}>
-            <button
-              className={`w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
-            >
-              {cloneElement(<SettingsIcon />, { isActive: menu === 3 })}
-              <span className={`text-black text-center text-base font-medium`}>
-                Settings
-              </span>
-            </button>
-          </Link> */}
+         
           <button
             className={` w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
             onClick={handleLogout}

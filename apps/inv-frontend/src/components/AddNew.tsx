@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 
 type AddNewProps= {
-    // onClick:() => void;
     inventoryName: string;
     onClick: React.MouseEventHandler<HTMLDivElement>;
 }
