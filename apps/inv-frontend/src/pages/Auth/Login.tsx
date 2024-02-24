@@ -34,12 +34,9 @@ const Login = () => {
       try {
         setIsLoginLoading(true);
         const response = await login(props);
-        console.log('response', response.data)
         if (response?.data?.access_token) {
           localStorage.setItem("token", response.data.access_token);
-          console.log('frontend', response.data.access_token)
           dispatch(loadUser());
-          console.log('authslice',authSlice)
         }
       } catch (error) {
         console.log(error);
@@ -57,7 +54,7 @@ const Login = () => {
     >
       <>
         <MetaTags
-          title={"Login"}
+          title={"Login | pantryHub"}
           pageUrl={window.location.href}
         />
         <div className="relative h-screen">
@@ -91,7 +88,7 @@ const Login = () => {
                         {loginIsError && (
                           <Alert color="failure" className="py-3">
                             <span className="font-medium">
-                              {loginError && loginError?.data?.error?.message}
+                              {loginError && loginError?.data?.message}
                             </span>
                           </Alert>
                         )}
@@ -159,19 +156,19 @@ const Login = () => {
                             <Label htmlFor="remember-me">Remember Me</Label>
                           </div>
                           <Link to={"/"}>
-                            <p className="flex font-bold text-base justify-end transition-all duration-200 ease-in-out hover:text-custom-accent-1">
+                            <p className="flex font-bold text-base justify-end transition-all duration-200 ease-in-out hover:text-custom-primary-1">
                               Forgot Password?{" "}
                             </p>
                           </Link>
                         </div>
                         <button
                           className={`${
-                            isLoginLoading ? "bg-white" : "bg-custom-accent-1"
+                            isLoginLoading ? "bg-white" : "bg-custom-primary-1"
                           }  ${
                             isLoginLoading
-                              ? "border-custom-accent-1"
+                              ? "border-custom-primary-1"
                               : "border-white"
-                          }  font-bold rounded-[0.3125rem]  text-white w-full h-[2.5rem] justify-center items-center hover:bg-white hover:border hover:border-custom-accent-1 hover:text-custom-accent-1`}
+                          }  font-bold rounded-[0.3125rem] border text-white w-full h-[2.5rem] justify-center items-center hover:bg-white hover:border hover:border-custom-primary-1 hover:text-custom-primary-1`}
                           type="submit"
                           disabled={isLoginLoading}
                         >

@@ -84,7 +84,7 @@ const SideMenu = () => {
           ))}
         </div>
         <div className="flex flex-col gap-4">
-          <Link to={`/settings`}>
+          {/* <Link to={`/settings`}>
             <button
               className={`w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
             >
@@ -93,7 +93,7 @@ const SideMenu = () => {
                 Settings
               </span>
             </button>
-          </Link>
+          </Link> */}
           <button
             className={` w-[10rem] py-3 px-[1.12rem] gap-[0.62rem] rounded-[0.3125rem] flex items-center  focus:outline-none`}
             onClick={handleLogout}
