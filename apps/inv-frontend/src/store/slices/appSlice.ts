@@ -20,48 +20,57 @@ const baseQuery = fetchBaseQuery({
 export const appApi = createApi({
   reducerPath: "appApi",
   baseQuery,
-  tagTypes: ["User"],
+  tagTypes: ["Inventory", "Stock", "AStock"],
   endpoints: (builder) => ({
-    getHelloV1: builder.query<any, void>({
-      query: () => "v1",
-    }),
-    getHelloV2: builder.query<any, void>({
-      query: () => "v2",
-    }),
-
-    getCourses: builder.query<any, void>({
-      query: () => "v1/courses",
-    }),
-
-    getCourse: builder.query<any, string>({
-      query: (courseId:string) => `v1/courses/${courseId}`,
-    }),
+    
 
     getInventory: builder.query<any, void>({
       query: () => "v1/inventory",
+      providesTags: ["Inventory"],
+    }),
+
+    getStock: builder.query<any, void>({
+      query: () => "v1/stock",
+      providesTags: ["Stock"],
     }),
 
     loadUser: builder.query<any, void>({
       query: () => "v1/users/user",
-      providesTags: ["User"],
     }),
 
     getPost: builder.query({
       query: (postId) => `/posts/${postId}`,
     }),
 
-    getCGPA: builder.query({
-      query: (studentId) => `calculate-gpa/${studentId}`,
+    getAStock: builder.query({
+      query: (stockId) => `v1/stock/${stockId}`,
+      providesTags: ["AStock"],
     }),
-    
-    
-    addStock: builder.mutation<any, LoginProps>({
+
+    addStock: builder.mutation<any, any>({
       query: (credentials) => ({
-        url: "/v1/stock/create",
+        url: "v1/stock/create",
         method: "POST",
         body: credentials,
       }),
-      // invalidatesTags: ["User"]
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
+    }),
+
+    removeStock: builder.mutation<any, any>({
+      query: (stockId) => ({
+        url: `v1/stock/${stockId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
+    }),
+
+    editStock: builder.mutation<any, any>({
+      query: ({ id, patch }) => ({
+        url: `v1/stock/${id}`,
+        method: 'PATCH',
+        body: patch,
+      }),
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
     }),
 
     login: builder.mutation<any, LoginProps>({
@@ -74,7 +83,6 @@ export const appApi = createApi({
       onQueryStarted: async (_:any, { dispatch, queryFulfilled }) => {
         try {
           const { data } = await queryFulfilled;
-          console.log(data);
           localStorage.setItem('token', data.access_token);
           dispatch(setAuthToken(data.access_token));
         } catch(error) {
@@ -85,34 +93,11 @@ export const appApi = createApi({
 
     registration: builder.mutation<any, RegistrationProps>({
       query: (credentials) => ({
-        url: "/v1/auth/register",
+        url: "/v1/users/register",
         method: "POST",
         body: credentials,
       }),
       // invalidatesTags: ["User"],
-      onQueryStarted: async (_:any, { dispatch, queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled;
-          console.log(data);
-        } catch(error) {
-          dispatch(setAuthToken(null));
-        }
-      },
-    }),
-
-    getCurrentSession: builder.query<any, void>({
-      query: () => "v1/sessions/current",
-    }),
-
-    getStudentCourses: builder.query<any, any>({
-      query: (studentId) => `v1/student-courses/student/${studentId}`,
-    }),
-
-    getScheduleByProgramAndLevel: builder.query<any, { programId: string; level: string }>({
-      query: ({ programId, level }) => ({
-        url: `v1/schedules/by-program-level?programId=${programId}&level=${level}`,
-        method: "GET",
-      }),
     }),
 
   }),
@@ -120,19 +105,13 @@ export const appApi = createApi({
 
 // Export hooks for usage in functional components
 export const {
-  useGetHelloV1Query,
-  useGetHelloV2Query,
   useLoginMutation,
   useRegistrationMutation,
-  useGetCoursesQuery,
   useLoadUserQuery,
   useGetInventoryQuery,
+  useGetStockQuery,
+  useEditStockMutation,
   useAddStockMutation,
-  useGetCurrentSessionQuery,
-  useGetScheduleByProgramAndLevelQuery,
-  useGetStudentCoursesQuery,
-  useGetCourseQuery,
-  useGetCGPAQuery,
-
-
+  useGetAStockQuery,
+  useRemoveStockMutation,
 } = appApi;
