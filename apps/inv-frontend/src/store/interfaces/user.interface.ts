@@ -19,8 +19,8 @@ export interface LoginProps {
 }
 
 export interface RegistrationProps {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
   password: string;
@@ -28,12 +28,15 @@ export interface RegistrationProps {
 
 export interface AddProductProps {
   name: string;
-  image: string;
-  category: string;
+  imageURL: string;
+  inventoryId?: string;
   location: string;
   quantity: number;
-  bestbefore: string;
-  price: number;
+  minStock: number;
+  maxStock: number;
+  unit?: string;
+  expirationDate: string;
+  unitPrice: number;
 }
 
 export interface AuthProps {
