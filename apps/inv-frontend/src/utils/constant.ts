@@ -32,3 +32,14 @@ function shuffleArray(array: any[]): any[] {
   }
   return array;
 }
+
+export const formatPrice = (price: any) => {
+  return price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "NGN",
+  }).replace('NGN', '₦');
+};
+
+export const addCommas = (num:any) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
