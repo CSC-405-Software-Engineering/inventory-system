@@ -52,7 +52,7 @@ const authSlice = createSlice({
     builder.addCase(loadUser.pending, (state) => ({ ...state }));
 
     builder.addCase(loadUser.fulfilled, (state, { payload }) => {
-      state.user = payload.user;
+      state.user = payload.data.user;
     });
 
     builder.addCase(loadUser.rejected, () => {

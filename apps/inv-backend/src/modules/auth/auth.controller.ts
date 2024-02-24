@@ -9,15 +9,17 @@ export class AuthController {
 
   @Version('1')
   @Post('login')
-  signIn(@Body() loginUserDto :LoginUserDto) {
-    return this.authService.login(loginUserDto);
+  async signIn(@Body() loginUserDto :LoginUserDto) {
+    const data = await this.authService.login(loginUserDto)
+    // return this.authService.login(loginUserDto);
+    return data;
   }
 
-  @Version('1')
-  @Post('register')
-  register(@Body() createUserDto: CreateUserDto) {
-    return this.authService.register(createUserDto);
-  }
+  // @Version('1')
+  // @Post('register')
+  // register(@Body() createUserDto: CreateUserDto) {
+  //   return this.authService.register(createUserDto);
+  // }
 
 
 }

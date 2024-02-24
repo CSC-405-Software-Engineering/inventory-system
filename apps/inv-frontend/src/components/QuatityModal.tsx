@@ -1,5 +1,4 @@
 import { Button, Modal } from "flowbite-react";
-import Picture from "@/assets/Picture1.png";
 
 interface QuatityModalProps {
   openModal: boolean;
@@ -19,7 +18,7 @@ const QuatityModal = ({
         <Modal.Body>
           <div className="flex flex-row space-x-20 gap-2">
           <div className="space-y-6">
-          <img width={"159px"} height={"157px"} src={Picture} alt="my Image" /> 
+          <img width={"159px"} height={"157px"} src={"Picture"} alt="my Image" /> 
           </div>
           <div > Quantity
           <div className="max-w-xs mx-auto">

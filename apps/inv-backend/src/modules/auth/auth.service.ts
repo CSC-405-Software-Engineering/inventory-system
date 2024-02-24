@@ -12,13 +12,33 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 export class AuthService {
   
   constructor(
-    private readonly usersService: UsersService,
     private jwtService: JwtService,
     private passwordService: PasswordService,
     @InjectRepository(Auth)
     private authRepository: Repository<Auth>,
   ) {}
 
+
+  async create (createUserDto: CreateUserDto){
+    const {email, password, role} = createUserDto
+    const existingAuth = await this.findByEmail(email);
+
+    if (existingAuth) {
+      throw new Error('User already exists');
+    }
+
+
+    const hashedPassword = await this.passwordService.hashPassword(password);
+
+    const newAuth = this.authRepository.create({
+      email,
+      password: hashedPassword,
+      role,
+    });
+
+    return await this.authRepository.save(newAuth);
+
+  }
 
   async findByEmail(email: string) {
     return await this.authRepository.findOne({ where: { email }, relations: ['user']});
@@ -31,9 +51,9 @@ export class AuthService {
     );
 
     const payload = { sub: auth.user.id };
-    console.log("here")
     return {
       access_token: this.jwtService.sign(payload),
+      userId: auth.user.id
     };
   }
 
@@ -62,29 +82,6 @@ export class AuthService {
     return await this.authRepository.findOne({ where: { id }});
   }
 
-  async register(createUserDto : CreateUserDto) {
-    const { email, password, firstName, lastName, role } = createUserDto;
-
-    const existingAuth = await this.findByEmail(email);
-
-    if (existingAuth) {
-      throw new Error('User already exists');
-    }
-
-
-    const hashedPassword = await this.passwordService.hashPassword(password);
-
-    const newAuth = this.authRepository.create({
-      email,
-      password: hashedPassword,
-      role,
-    });
-
-    const auth = await this.authRepository.save(newAuth);
-
-    await this.usersService.create(firstName, lastName, auth );
-
-    return auth;
-  }
+  
 
 }

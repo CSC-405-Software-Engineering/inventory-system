@@ -1,10 +1,14 @@
 import DashboardLayout from "@/components/DashboardLayout";
+import MetaTags from "@/components/MetaTags";
 
 const SettingsPage = () => {
   return (
-    <DashboardLayout>
-      <div>SettingsPage</div>
-    </DashboardLayout>
+    <>
+      <MetaTags title={"Settings | pantryHub"} pageUrl={window.location.href} />
+      <DashboardLayout>
+        <div>SettingsPage</div>
+      </DashboardLayout>
+    </>
   );
 };
 
