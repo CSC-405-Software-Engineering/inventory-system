@@ -17,12 +17,12 @@ export default defineConfig({
       "@": "/src",
     },
   },
-  // server: {
-  //   proxy: {
-  //     "/backend": {
-  //       target: "https://inventory-system-i0do.onrender.com/",
-  //       changeOrigin: true,
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      "/backend": {
+        target: "https://inventory-system-i0do.onrender.com/",
+        changeOrigin: true,
+      },
+    },
+  },
 });
