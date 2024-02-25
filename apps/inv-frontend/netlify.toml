@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/backend/*"
+  to = "https://inventory-system-i0do.onrender.com/backend/:slug"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
