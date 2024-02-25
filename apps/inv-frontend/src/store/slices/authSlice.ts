@@ -19,7 +19,7 @@ export const loadUser = createAsyncThunk<any, void>(
 
     try {
       const { data }: any = await axios.get<any>(
-        `/backend/v1/users/user`,
+        `https://inventory-system-i0do.onrender.com/backend/v1/users/user`,
         {
           headers: { "x-access-token": token },
         }
