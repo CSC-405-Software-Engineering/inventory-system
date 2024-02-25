@@ -4,7 +4,7 @@ import { setAuthToken } from "./authSlice";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://inventory-system-i0do.onrender.com/backend/",
+  baseUrl: "backend/",
   prepareHeaders: (headers, { getState }:any) => {
     const token = getState()?.auth?.token;
 
