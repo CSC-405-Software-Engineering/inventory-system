@@ -2,6 +2,7 @@
   from = "/backend/*"
   to = "https://inventory-system-i0do.onrender.com/backend/:splat"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/*"
