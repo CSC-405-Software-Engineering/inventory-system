@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { LoginProps } from "../interfaces/user.interface";
+import { LoginProps, RegistrationProps } from "../interfaces/user.interface";
 import { setAuthToken } from "./authSlice";
 
 // Define the base query
 const baseQuery = fetchBaseQuery({
-  baseUrl: "backend/",
+  baseUrl: "https://inventory-system-i0do.onrender.com/backend/",
   prepareHeaders: (headers, { getState }:any) => {
     const token = getState()?.auth?.token;
 
@@ -20,36 +20,54 @@ const baseQuery = fetchBaseQuery({
 export const appApi = createApi({
   reducerPath: "appApi",
   baseQuery,
-  tagTypes: ["User"],
+  tagTypes: ["Inventory", "Stock", "AStock"],
   endpoints: (builder) => ({
-    getHelloV1: builder.query<any, void>({
-      query: () => "v1",
-    }),
-    getHelloV2: builder.query<any, void>({
-      query: () => "v2",
+    
+
+    getInventory: builder.query<any, void>({
+      query: () => "v1/inventory",
+      providesTags: ["Inventory"],
     }),
 
-    getCourses: builder.query<any, void>({
-      query: () => "v1/courses",
-    }),
-
-    getCourse: builder.query<any, string>({
-      query: (courseId:string) => `v1/courses/${courseId}`,
+    getStock: builder.query<any, void>({
+      query: () => "v1/stock",
+      providesTags: ["Stock"],
     }),
 
     loadUser: builder.query<any, void>({
       query: () => "v1/users/user",
-      providesTags: ["User"],
     }),
 
-    getPost: builder.query({
-      query: (postId) => `/posts/${postId}`,
+    getAStock: builder.query({
+      query: (stockId) => `v1/stock/${stockId}`,
+      providesTags: ["AStock"],
     }),
 
-    getCGPA: builder.query({
-      query: (studentId) => `calculate-gpa/${studentId}`,
+    addStock: builder.mutation<any, any>({
+      query: (credentials) => ({
+        url: "v1/stock/create",
+        method: "POST",
+        body: credentials,
+      }),
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
     }),
-    
+
+    removeStock: builder.mutation<any, any>({
+      query: (stockId) => ({
+        url: `v1/stock/${stockId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
+    }),
+
+    editStock: builder.mutation<any, any>({
+      query: ({ id, patch }) => ({
+        url: `v1/stock/${id}`,
+        method: 'PATCH',
+        body: patch,
+      }),
+      invalidatesTags: ["Inventory", "Stock", "AStock"]
+    }),
 
     login: builder.mutation<any, LoginProps>({
       query: (credentials) => ({
@@ -69,19 +87,13 @@ export const appApi = createApi({
       },
     }),
 
-    getCurrentSession: builder.query<any, void>({
-      query: () => "v1/sessions/current",
-    }),
-
-    getStudentCourses: builder.query<any, any>({
-      query: (studentId) => `v1/student-courses/student/${studentId}`,
-    }),
-
-    getScheduleByProgramAndLevel: builder.query<any, { programId: string; level: string }>({
-      query: ({ programId, level }) => ({
-        url: `v1/schedules/by-program-level?programId=${programId}&level=${level}`,
-        method: "GET",
+    registration: builder.mutation<any, RegistrationProps>({
+      query: (credentials) => ({
+        url: "/v1/users/register",
+        method: "POST",
+        body: credentials,
       }),
+      // invalidatesTags: ["User"],
     }),
 
   }),
@@ -89,16 +101,13 @@ export const appApi = createApi({
 
 // Export hooks for usage in functional components
 export const {
-  useGetHelloV1Query,
-  useGetHelloV2Query,
   useLoginMutation,
-  useGetCoursesQuery,
+  useRegistrationMutation,
   useLoadUserQuery,
-  useGetCurrentSessionQuery,
-  useGetScheduleByProgramAndLevelQuery,
-  useGetStudentCoursesQuery,
-  useGetCourseQuery,
-  useGetCGPAQuery,
-
-
+  useGetInventoryQuery,
+  useGetStockQuery,
+  useEditStockMutation,
+  useAddStockMutation,
+  useGetAStockQuery,
+  useRemoveStockMutation,
 } = appApi;

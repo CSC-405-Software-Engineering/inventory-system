@@ -8,6 +8,7 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AppContextType } from "./global/contexts";
+import { HelmetProvider } from "react-helmet-async";
 
 type Props = {
   assetMap?: {
@@ -75,91 +76,87 @@ const App: React.FC<Props> = ({ assetMap }) => {
     return (
       // <AppContext.Provider value={{ baseUrl }}>
       //   <QueryClientProvider client={queryClient}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persister}>
-              <Router>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(() => import("@/pages/Home/HomePage"))
-                        )}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/login"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(() => import("@/pages/Auth/Login"))
-                        )}
-                      </Suspense>
-                    }
-                  />
-                   <Route
-                    path="/registration"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(() => import("@/pages/Auth/Registration"))
-                        )}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/dashboard"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(
-                            () =>
-                              import("@/pages/Users/UserDashboard")
-                          )
-                        )}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/pantry"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(
-                            () =>
-                              import("@/pages/Users/Pantry")
-                          )
-                        )}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/settings"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(() => import("@/pages/Users/SettingsPage"))
-                        )}
-                      </Suspense>
-                    }
-                  />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persister}>
+          <HelmetProvider>
+            <Router>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Home/HomePage"))
+                      )}
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Auth/Login"))
+                      )}
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/registration"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Auth/Registration"))
+                      )}
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/pantry"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Pantry/Pantry"))
+                      )}
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Users/UserDashboard"))
+                      )}
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Users/SettingsPage"))
+                      )}
+                    </Suspense>
+                  }
+                />
 
-                  <Route
-                    path="*"
-                    element={
-                      <Suspense fallback={<PageLoader />}>
-                        {React.createElement(
-                          lazy(() => import("@/pages/Errors/NotFound"))
-                        )}
-                      </Suspense>
-                    }
-                  />
-                </Routes>
-              </Router>
-            </PersistGate>
-          </Provider>
+                <Route
+                  path="*"
+                  element={
+                    <Suspense fallback={<PageLoader />}>
+                      {React.createElement(
+                        lazy(() => import("@/pages/Errors/NotFound"))
+                      )}
+                    </Suspense>
+                  }
+                />
+              </Routes>
+            </Router>
+          </HelmetProvider>
+        </PersistGate>
+      </Provider>
       //   </QueryClientProvider>
       // </AppContext.Provider>
     );
@@ -219,7 +216,7 @@ const App: React.FC<Props> = ({ assetMap }) => {
     } else {
       return (
         <>
-          {appBody()} 
+          {appBody()}
           {/* //only the body in dev mode. CSS should be available at
           dev mode with createRoot */}
         </>

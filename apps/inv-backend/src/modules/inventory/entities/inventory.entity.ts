@@ -1,5 +1,6 @@
 import { Stock } from 'src/modules/stock/entities/stock.entity';
-import { Entity, Column, PrimaryGeneratedColumn, Index, OneToMany } from 'typeorm';
+import { User } from 'src/modules/users/entities/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, Index, OneToMany, ManyToOne } from 'typeorm';
 
 @Entity('inventory')
 export class Inventory {
@@ -16,6 +17,9 @@ export class Inventory {
   dateCreated: Date;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
-  dateUpdated: Date;  
+  dateUpdated: Date;
+  
+  @ManyToOne(() => User, user => user.inventory)
+  user: User;
 
 }
